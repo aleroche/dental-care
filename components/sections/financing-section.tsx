@@ -1,35 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { FINANCING_OPTIONS } from "@/lib/financing";
 import { ArrowRight, CreditCard, PiggyBank, Wallet } from "lucide-react";
 
+const getIcon = (index: number) => {
+  const icons = [CreditCard, PiggyBank, Wallet, CreditCard];
+  return icons[index % icons.length];
+};
+
 export function FinancingSection() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const element = document.getElementById('financing-section');
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.8) {
-          setIsVisible(true);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    const timer = setTimeout(() => setIsLoaded(true), 800);
+    return () => clearTimeout(timer);
   }, []);
 
-  const getIcon = (index: number) => {
-    const icons = [CreditCard, PiggyBank, Wallet];
-    return icons[index % icons.length];
-  };
-
   return (
-    <section id="financing-section" className="py-28 bg-gradient-to-r from-[--color-primary] to-[--color-primary-dark] relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-r from-[#0A6CFF] to-[#0052CC] relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 opacity-10">
@@ -40,52 +29,49 @@ export function FinancingSection() {
             <rect width="100%" height="100%" fill="url(#grid)" />
           </svg>
         </div>
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[--color-accent]/30 rounded-full blur-3xl" />
+        <div className="absolute -right-32 top-0 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
+        <div className="absolute -left-32 bottom-0 w-96 h-96 bg-[#00B894]/30 rounded-full blur-3xl" />
       </div>
 
       <div className="container-wide relative z-10">
-        {/* Header - More Spacing */}
-        <div 
-          className={`text-center mb-16 transition-all duration-700 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-        >
-          <span className="inline-block px-5 py-2 mb-5 text-xs font-semibold tracking-wider text-[--color-primary] uppercase bg-white/20 rounded-full">
+        {/* Header */}
+        <div className={`text-center mb-12 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <span className="inline-block px-4 py-1.5 mb-4 text-sm font-semibold text-[#0A6CFF] uppercase bg-white/20 rounded-full">
             Payment Options
           </span>
-          <h2 className="font-[family-name:var(--font-cormorant)] text-4xl md:text-5xl text-white mb-5">
+          <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">
             Flexible Payment Plans
           </h2>
-          <p className="text-white/80 max-w-2xl mx-auto text-lg">
-            Quality dental care shouldn't break the bank. We offer flexible financing 
+          <p className="text-white/80 max-w-2xl mx-auto">
+            Quality dental care shouldn&apos;t break the bank. We offer flexible financing 
             options to make your treatment affordable and stress-free.
           </p>
         </div>
 
-        {/* Financing Options Grid - More Spacing */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Financing Options Grid - 4 columns as per SPEC */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {FINANCING_OPTIONS.map((option, index) => {
             const Icon = getIcon(index);
             return (
               <div
                 key={option.id}
-                className={`group relative p-10 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-[--color-accent]/30 transition-all duration-500 hover:shadow-xl hover:shadow-[--color-accent]/10 hover:-translate-y-2 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
+                className={`group relative p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-[#00B894]/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
                 style={{ transitionDelay: `${index * 150 + 200}ms` }}
               >
-                <div className="w-16 h-16 rounded-2xl bg-[--color-accent]/20 flex items-center justify-center mb-6 group-hover:bg-[--color-accent] group-hover:scale-110 transition-all duration-300">
-                  <Icon className="w-8 h-8 text-[--color-accent] group-hover:text-white transition-colors" />
+                <div className="w-14 h-14 rounded-2xl bg-[#00B894]/20 flex items-center justify-center mb-5 group-hover:bg-[#00B894] group-hover:scale-110 transition-all duration-300">
+                  <Icon className="w-7 h-7 text-[#00B894] group-hover:text-white transition-colors" />
                 </div>
 
-                <h3 className="font-[family-name:var(--font-cormorant)] text-xl text-white mb-3">
+                <h3 className="font-serif text-xl text-white mb-3">
                   {option.name}
                 </h3>
                 
-                <p className="text-white/70 leading-relaxed mb-5">
+                <p className="text-white/70 text-sm leading-relaxed mb-5">
                   {option.description}
                 </p>
 
-                <button className="inline-flex items-center gap-2 text-sm font-semibold text-[--color-accent] group-hover:gap-3 transition-all">
+                {/* Button - Defined Colors */}
+                <button className="inline-flex items-center gap-2 text-sm font-semibold text-[#00B894] group-hover:gap-3 transition-all">
                   Apply Now
                   <ArrowRight className="w-4 h-4" />
                 </button>
@@ -94,13 +80,11 @@ export function FinancingSection() {
           })}
         </div>
 
-        {/* Help Text - More Spacing */}
-        <div 
-          className={`text-center mt-16 transition-all duration-700 delay-500 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-        >
-          <p className="text-white/60 text-lg">
+        {/* Help Text */}
+        <div className={`text-center mt-10 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '600ms' }}>
+          <p className="text-white/60">
             Have questions about payment options?{' '}
-            <a href="tel:+12819999999" className="text-[--color-accent] font-semibold hover:underline">
+            <a href="tel:+12815550123" className="text-[#00B894] font-semibold hover:underline">
               Call us
             </a>{' '}
             for personalized assistance.

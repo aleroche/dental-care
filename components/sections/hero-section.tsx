@@ -1,122 +1,147 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { ChevronDown, Phone, Clock, Star } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Phone, Clock, Award, ArrowRight, ChevronDown, Star } from "lucide-react";
+
+const heroImages = {
+  background: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1920&q=80",
+  dentist: "https://images.unsplash.com/photo-1551076805-e1869033e561?w=600&q=80",
+};
 
 export function HeroSection() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(true);
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[--color-slate-50] via-white to-[--color-slate-100]">
-      {/* Background Elements - Blue/Green */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white via-transparent to-[--color-slate-50]/50" />
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#020617]">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroImages.background})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#020617]/95 via-[#020617]/80 to-[#020617]/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/50 via-transparent to-transparent" />
         
-        {/* Decorative Blobs */}
-        <div 
-          className="absolute top-20 -left-32 w-[600px] h-[600px] bg-[--color-primary]/5 rounded-full blur-3xl animate-blob"
-        />
-        <div 
-          className="absolute bottom-20 -right-32 w-[500px] h-[500px] bg-[--color-accent]/5 rounded-full blur-3xl animate-blob"
-          style={{ animationDelay: '2s' }}
-        />
-        <div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[--color-primary-light]/3 rounded-full blur-3xl animate-blob"
-          style={{ animationDelay: '4s' }}
-        />
-        
-        {/* Geometric Accents */}
-        <div className="absolute top-40 right-16 w-32 h-32 border border-[--color-primary]/10 rounded-full animate-float" />
-        <div className="absolute bottom-48 left-16 w-20 h-20 border border-[--color-accent]/10 rounded-full animate-float" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/3 left-1/4 w-2 h-2 bg-[--color-primary]/30 rounded-full animate-pulse-gentle" />
-        <div className="absolute bottom-1/3 right-1/4 w-2 h-2 bg-[--color-accent]/30 rounded-full animate-pulse-gentle" style={{ animationDelay: '1s' }} />
+        {/* Animated Gradient Orbs */}
+        <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-[#0A6CFF]/20 rounded-full blur-[120px] animate-blob" />
+        <div className="absolute bottom-0 right-0 w-[600px] h-[400px] bg-[#00B894]/15 rounded-full blur-[100px] animate-blob" style={{ animationDelay: '4s' }} />
       </div>
 
-      {/* Main Content - More Spacious */}
-      <div className="container-wide relative z-10 py-32 md:py-40">
-        <div className="max-w-5xl mx-auto text-center">
-          {/* Badge - Green Accent */}
-          <div 
-            className={`inline-flex items-center gap-2 px-5 py-2.5 mb-10 text-sm font-semibold text-[--color-accent-dark] bg-[--color-accent]/10 rounded-full opacity-0 ${isLoaded ? 'animate-fade-in-up' : ''}`}
-            style={{ animationDelay: '200ms' }}
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[--color-accent] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[--color-accent]"></span>
-            </span>
-            Now Accepting New Patients
+      {/* Content */}
+      <div className="container-wide relative z-10 py-24 md:py-32 lg:py-40">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Left Content */}
+          <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Badge */}
+            <div className={`inline-flex items-center gap-2 px-4 py-2 mb-8 bg-[#0A6CFF]/20 border border-[#0A6CFF]/30 rounded-full transition-all duration-700 delay-200 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00B894] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00B894]" />
+              </span>
+              <span className="text-white/90 text-sm font-medium">Now Accepting New Patients</span>
+            </div>
+
+            {/* Main Heading */}
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white leading-[1.1] mb-6">
+              Your family dentist in{' '}
+              <span className="text-[#00B894] italic">Katy, Texas</span>
+            </h1>
+
+            {/* Subheading */}
+            <h2 className="text-xl md:text-2xl text-[#0A6CFF] font-medium mb-6">
+              Top-rated dental care you can count on
+            </h2>
+
+            {/* Description */}
+            <p className="text-lg text-white/70 max-w-xl mb-10 leading-relaxed">
+              At MiraMar Family Dental, we&apos;re more than just your family dentist in Katy, 
+              Texas &ndash; we&apos;re your partners in oral health. Experience exceptional 
+              dentistry in a comfortable, welcoming environment.
+            </p>
+
+            {/* CTA Buttons - Defined Colors */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+              <button className="group px-8 py-4 bg-[#0A6CFF] text-white text-lg font-semibold rounded-lg hover:bg-[#0052CC] transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-[#0A6CFF]/25 hover:scale-[1.02] active:scale-[0.98]">
+                Book Your Appointment
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+              <button className="px-8 py-4 border-2 border-white/30 text-white text-lg font-semibold rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
+                Call Us: (281) 555-0123
+              </button>
+            </div>
+
+            {/* Trust Stats */}
+            <div className="flex flex-wrap gap-8">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-[#00B894]/20 rounded-full flex items-center justify-center">
+                  <Award className="w-6 h-6 text-[#00B894]" />
+                </div>
+                <div>
+                  <p className="text-white font-semibold">15+ Years</p>
+                  <p className="text-white/50 text-sm">Experience</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-[#0A6CFF]/20 rounded-full flex items-center justify-center">
+                  <Clock className="w-6 h-6 text-[#0A6CFF]" />
+                </div>
+                <div>
+                  <p className="text-white font-semibold">Same-Day</p>
+                  <p className="text-white/50 text-sm">Emergencies</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-[#00B894]/20 rounded-full flex items-center justify-center">
+                  <Phone className="w-6 h-6 text-[#00B894]" />
+                </div>
+                <div>
+                  <p className="text-white font-semibold">2,500+</p>
+                  <p className="text-white/50 text-sm">Happy Patients</p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Main Heading - Professional Blue */}
-          <h1 
-            className={`font-[family-name:var(--font-cormorant)] text-5xl md:text-6xl lg:text-7xl text-[--color-slate-800] leading-[1.15] mb-8 opacity-0 ${isLoaded ? 'animate-fade-in-up' : ''}`}
-            style={{ animationDelay: '400ms' }}
-          >
-            Your Smile,
-            <br />
-            <span className="text-[--color-primary] italic font-normal">Our Priority</span>
-          </h1>
-
-          {/* Subtitle - More Spacing */}
-          <p 
-            className={`text-lg md:text-xl text-[--color-slate-500] max-w-2xl mx-auto mb-12 leading-relaxed opacity-0 ${isLoaded ? 'animate-fade-in-up' : ''}`}
-            style={{ animationDelay: '600ms' }}
-          >
-            Experience exceptional family dentistry in Katy, Texas. Our compassionate 
-            team provides comprehensive dental care for patients of all ages, from 
-            routine cleanings to advanced procedures.
-          </p>
-
-          {/* CTA Buttons - Blue/Green */}
-          <div 
-            className={`flex flex-col sm:flex-row gap-5 justify-center items-center mb-16 opacity-0 ${isLoaded ? 'animate-fade-in-up' : ''}`}
-            style={{ animationDelay: '800ms' }}
-          >
-            <button className="group px-8 py-4 bg-[--color-primary] text-white text-lg font-medium rounded-full hover:bg-[--color-primary-dark] transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[--color-primary]/25 flex items-center gap-2">
-              Book Your Appointment
-              <ChevronDown className="w-5 h-5 rotate-[-90deg] group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="group px-8 py-4 border-2 border-[--color-accent] text-[--color-accent] text-lg font-medium rounded-full hover:bg-[--color-accent] hover:text-white transition-all duration-300 flex items-center gap-2">
-              Meet Our Team
-              <ChevronDown className="w-5 h-5 rotate-[-90deg] group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-
-          {/* Trust Badges - Professional Spacing */}
-          <div 
-            className={`flex flex-wrap justify-center gap-8 md:gap-12 opacity-0 ${isLoaded ? 'animate-fade-in' : ''}`}
-            style={{ animationDelay: '1000ms' }}
-          >
-            <div className="flex items-center gap-3 text-[--color-slate-500]">
-              <Star className="w-5 h-5 text-[--color-accent] fill-[--color-accent]" />
-              <span className="text-sm font-medium">2,000+ Happy Patients</span>
-            </div>
-            <div className="flex items-center gap-3 text-[--color-slate-500]">
-              <Clock className="w-5 h-5 text-[--color-primary] fill-[--color-primary]" />
-              <span className="text-sm font-medium">Same-Day Emergencies</span>
-            </div>
-            <div className="flex items-center gap-3 text-[--color-slate-500]">
-              <Phone className="w-5 h-5 text-[--color-accent] fill-[--color-accent]" />
-              <span className="text-sm font-medium">15+ Years Experience</span>
+          {/* Right Image */}
+          <div className={`relative hidden lg:block transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}>
+            <div className="relative">
+              <div className="absolute -top-6 -left-6 w-full h-full border-2 border-[#00B894]/30 rounded-2xl" />
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img 
+                  src={heroImages.dentist} 
+                  alt="MiraMar Family Dental Clinic"
+                  className="w-full h-[500px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/60 via-transparent to-transparent" />
+                
+                {/* Floating Card */}
+                <div className={`absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-xl transition-all duration-700 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-[#0A6CFF] rounded-full flex items-center justify-center">
+                      <Star className="w-6 h-6 text-white fill-white" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-[#1E293B]">5.0 Rating</p>
+                      <p className="text-sm text-[#64748B]">Based on 250+ reviews</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div 
-        className={`absolute bottom-10 left-1/2 -translate-x-1/2 opacity-0 ${isLoaded ? 'animate-fade-in' : ''}`}
-        style={{ animationDelay: '1200ms' }}
-      >
-        <div className="flex flex-col items-center gap-3 text-[--color-slate-300]">
-          <span className="text-xs uppercase tracking-widest font-medium">Scroll</span>
-          <div className="w-7 h-12 border-2 border-current rounded-full flex justify-center pt-3">
-            <div className="w-1.5 h-3 bg-current rounded-full animate-bounce" />
-          </div>
+      <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-700 delay-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="flex flex-col items-center gap-2 text-white/50 cursor-pointer">
+          <span className="text-xs uppercase tracking-widest">Scroll</span>
+          <ChevronDown className="w-5 h-5 animate-bounce" />
         </div>
       </div>
     </section>
