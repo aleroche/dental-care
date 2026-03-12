@@ -1,0 +1,11 @@
+export { HeroSection } from "./hero-section";
+export { OffersSection } from "./offers-section";
+export { AboutSection } from "./about-section";
+export { WhyUsSection } from "./why-us-section";
+export { BilingualSection } from "./bilingual-section";
+export { ServicesSection } from "./services-section";
+export { InsuranceSection } from "./insurance-section";
+export { FinancingSection } from "./financing-section";
+export { TeamSection } from "./team-section";
+export { TestimonialsSection } from "./testimonials-section";
+export { Footer } from "./footer";
