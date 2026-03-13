@@ -108,10 +108,9 @@ export function Navbar() {
                         }
                       `}>
                         {item.title}
-                        <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                       </NavigationMenuTrigger>
                       <NavigationMenuContent className="absolute left-0 top-full mt-1">
-                        <ul className="w-56 bg-white rounded-xl shadow-xl border border-[#E2E8F0] p-1">
+                        <ul className="w-56 bg-white p-1">
                           {item.children.map((child) => (
                             <li key={child.title}>
                               <NavigationMenuLink asChild>
