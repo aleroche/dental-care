@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, Sun, Moon, ChevronDown } from "lucide-react";
+import { useTheme } from "next-themes";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -55,6 +56,12 @@ const NAV_ITEMS = [
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,6 +71,10 @@ export function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
 
   return (
     <header 
@@ -148,7 +159,23 @@ export function Navbar() {
           </NavigationMenu>
 
           {/* CTA & Phone */}
-          <div className="hidden lg:flex items-center gap-5">
+          <div className="hidden lg:flex items-center gap-4">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className={`p-2.5 rounded-lg transition-colors ${
+                scrolled 
+                  ? 'text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#0A6CFF]' 
+                  : 'text-white/80 hover:bg-white/10 hover:text-white'
+              }`}
+              aria-label="Toggle theme"
+            >
+              {mounted && theme === 'dark' ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
+            </button>
             <a 
               href="tel:+12815550123" 
               className={`flex items-center gap-2 transition-colors ${scrolled ? 'text-[#64748B] hover:text-[#0A6CFF]' : 'text-white/80 hover:text-white'}`}
