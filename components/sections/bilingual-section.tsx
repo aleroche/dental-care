@@ -14,7 +14,7 @@ export function BilingualSection() {
   }, []);
 
   return (
-    <section className="py-24 bg-gradient-to-r from-[#00B894] to-[#009975] relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-r from-[#00896B] to-[#006B52] relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 opacity-10">
@@ -39,17 +39,17 @@ export function BilingualSection() {
                 alt="Our bilingual dental team"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#009975]/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#006B52]/60 via-transparent to-transparent" />
               
-              {/* Language Badges */}
+              {/* Language Badges - Better contrast */}
               <div className="absolute bottom-6 left-6 right-6 flex items-center justify-center gap-6">
-                <div className="bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg flex items-center gap-3">
+                <div className="bg-[#1E293B]/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg flex items-center gap-3 border border-white/20">
                   <span className="text-2xl">🇺🇸</span>
-                  <span className="font-semibold text-[#1E293B]">English</span>
+                  <span className="font-semibold text-white">English</span>
                 </div>
-                <div className="bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg flex items-center gap-3">
+                <div className="bg-[#1E293B]/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg flex items-center gap-3 border border-white/20">
                   <span className="text-2xl">🇪🇸</span>
-                  <span className="font-semibold text-[#1E293B]">Español</span>
+                  <span className="font-semibold text-white">Español</span>
                 </div>
               </div>
             </div>
@@ -57,7 +57,7 @@ export function BilingualSection() {
             {/* Floating Badge */}
             <div className="absolute -bottom-5 -right-5 bg-white rounded-xl p-5 shadow-xl hidden md:block">
               <div className="flex items-center gap-3">
-                <Globe2 className="w-8 h-8 text-[#00B894]" />
+                <Globe2 className="w-8 h-8 text-[#00896B]" />
                 <div>
                   <p className="font-bold text-[#1E293B] text-sm">Bilingual Care</p>
                   <p className="text-xs text-[#64748B]">English & Spanish</p>
@@ -68,7 +68,8 @@ export function BilingualSection() {
 
           {/* Content Side */}
           <div className={`text-white transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
-            <span className="inline-block px-4 py-1.5 mb-5 text-sm font-semibold text-[#009975] uppercase bg-white/20 rounded-full">
+            {/* Badge - White text on green bg for contrast */}
+            <span className="inline-block px-5 py-2 mb-6 text-sm font-bold text-[#006B52] uppercase bg-white rounded-full shadow-md">
               Language No Barrier
             </span>
             
@@ -76,20 +77,20 @@ export function BilingualSection() {
               Services Available in <span className="italic font-light">English & Spanish</span>
             </h2>
             
-            <p className="text-white/90 text-lg mb-6 leading-relaxed">
+            <p className="text-white/95 text-lg mb-6 leading-relaxed">
               At MiraMar Family Dental, we believe language should never be a barrier 
               to receiving quality dental care. Our bilingual team is dedicated to 
               making every patient feel comfortable and understood.
             </p>
 
-            <p className="text-white/90 mb-8 leading-relaxed">
+            <p className="text-white/95 mb-8 leading-relaxed">
               From your first phone call to your final treatment, our team communicates 
               in your preferred language, ensuring you fully understand your oral health 
               and treatment options.
             </p>
 
-            {/* Button - Defined Colors */}
-            <button className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#00B894] font-semibold rounded-lg hover:bg-[#F1F5F9] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg">
+            {/* Button - Better contrast */}
+            <button className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#006B52] font-bold rounded-lg hover:bg-[#F1F5F9] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg">
               Meet Our Team
               <ArrowRight className="w-5 h-5" />
             </button>
