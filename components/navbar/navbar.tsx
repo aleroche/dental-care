@@ -1,31 +1,51 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const NAV_ITEMS = [
-  { title: "About us", href: "/about", children: [
-    { title: "Dr Keyttia Beovides", href: "/about/dr-beovides" },
-    { title: "Meet the Team", href: "/about/team" }
-  ]},
-  { title: "Dental Services", href: "/services", children: [
-    { title: "Diagnostic & Preventive", href: "/services/diagnostic" },
-    { title: "Oral Surgery", href: "/services/surgery" },
-    { title: "Restorative Dentistry", href: "/services/restorative" },
-    { title: "Endodontics", href: "/services/endodontics" },
-    { title: "Cosmetic Dentistry", href: "/services/cosmetic" },
-    { title: "Periodontal", href: "/services/periodontal" },
-    { title: "Orthodontic", href: "/services/orthodontic" },
-    { title: "Pediatric Dentistry", href: "/services/pediatric" }
-  ]},
-  { title: "Patients", href: "/patients", children: [
-    { title: "New patients", href: "/patients/new" },
-    { title: "MFD Membership", href: "/patients/membership" },
-    { title: "Financing plans", href: "/patients/financing" },
-    { title: "Dental Insurance", href: "/patients/insurance" },
-    { title: "FAQs", href: "/patients/faqs" }
-  ]},
+  { 
+    title: "About us", 
+    href: "/about", 
+    children: [
+      { title: "Dr Keyttia Beovides", href: "/about/dr-beovides" },
+      { title: "Meet the Team", href: "/about/team" }
+    ]
+  },
+  { 
+    title: "Dental Services", 
+    href: "/services", 
+    children: [
+      { title: "Diagnostic & Preventive", href: "/services/diagnostic" },
+      { title: "Oral Surgery", href: "/services/surgery" },
+      { title: "Restorative Dentistry", href: "/services/restorative" },
+      { title: "Endodontics", href: "/services/endodontics" },
+      { title: "Cosmetic Dentistry", href: "/services/cosmetic" },
+      { title: "Periodontal", href: "/services/periodontal" },
+      { title: "Orthodontic", href: "/services/orthodontic" },
+      { title: "Pediatric Dentistry", href: "/services/pediatric" }
+    ]
+  },
+  { 
+    title: "Patients", 
+    href: "/patients", 
+    children: [
+      { title: "New patients", href: "/patients/new" },
+      { title: "MFD Membership", href: "/patients/membership" },
+      { title: "Financing plans", href: "/patients/financing" },
+      { title: "Dental Insurance", href: "/patients/insurance" },
+      { title: "FAQs", href: "/patients/faqs" }
+    ]
+  },
   { title: "Blog", href: "/blog" },
   { title: "Deals", href: "/deals" },
   { title: "Reviews", href: "/reviews" },
@@ -35,7 +55,6 @@ const NAV_ITEMS = [
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,34 +64,6 @@ export function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Only close menu on scroll, not on link click
-  useEffect(() => {
-    if (isOpen && !scrolled) {
-      // Don't close on scroll when menu is open
-    }
-  }, [scrolled, isOpen]);
-
-  const toggleItem = (e: React.MouseEvent, title: string) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setExpandedItems(prev => 
-      prev.includes(title) 
-        ? prev.filter(item => item !== title)
-        : [...prev, title]
-    );
-  };
-
-  const handleLinkClick = (e: React.MouseEvent) => {
-    // Just close expanded items, not the menu itself
-    setExpandedItems([]);
-  };
-
-  const toggleMenu = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsOpen(!isOpen);
-  };
 
   return (
     <header 
@@ -102,34 +93,60 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {NAV_ITEMS.map((item) => (
-              <div key={item.title} className="relative group">
-                <Link 
-                  href={item.href || "#"}
-                  className={`text-sm font-medium transition-colors relative after:absolute after:bottom-[-6px] after:left-0 after:w-0 after:h-0.5 after:bg-[#00B894] after:transition-all hover:after:w-full ${
-                    scrolled ? 'text-[#475569] hover:text-[#0A6CFF]' : 'text-white/80 hover:text-white'
-                  }`}
-                >
-                  {item.title}
-                </Link>
-                {item.children && (
-                  <div className="absolute left-0 top-full hidden group-hover:block w-56 bg-white rounded-xl shadow-xl border border-[#E2E8F0] p-3 mt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.title}
-                        href={child.href || "#"}
-                        className="block px-4 py-2.5 text-sm text-[#475569] hover:bg-[#F1F5F9] hover:text-[#0A6CFF] rounded-lg transition-colors"
+          {/* Desktop Navigation with Shadcn NavigationMenu - Positioned per item */}
+          <NavigationMenu className="hidden lg:flex" viewport={false}>
+            <NavigationMenuList className="gap-1">
+              {NAV_ITEMS.map((item) => (
+                <NavigationMenuItem key={item.title}>
+                  {item.children ? (
+                    <>
+                      <NavigationMenuTrigger className={`
+                        inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors bg-transparent 
+                        ${scrolled 
+                          ? 'text-[#475569] hover:bg-[#F1F5F9] hover:text-[#0A6CFF]' 
+                          : 'text-white/80 hover:bg-white/10 hover:text-white'
+                        }
+                      `}>
+                        {item.title}
+                        <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent className="absolute left-0 top-full mt-1">
+                        <ul className="w-56 bg-white rounded-xl shadow-xl border border-[#E2E8F0] p-1">
+                          {item.children.map((child) => (
+                            <li key={child.title}>
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  href={child.href || "#"}
+                                  className="block px-4 py-2.5 text-sm text-[#475569] hover:bg-[#F1F5F9] hover:text-[#0A6CFF] rounded-lg cursor-pointer"
+                                >
+                                  {child.title}
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </NavigationMenuContent>
+                    </>
+                  ) : (
+                    <NavigationMenuLink asChild>
+                      <Link 
+                        href={item.href || "#"}
+                        className={`
+                          inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors bg-transparent
+                          ${scrolled 
+                            ? 'text-[#475569] hover:bg-[#F1F5F9] hover:text-[#0A6CFF]' 
+                            : 'text-white/80 hover:bg-white/10 hover:text-white'
+                          }
+                        `}
                       >
-                        {child.title}
+                        {item.title}
                       </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
+                    </NavigationMenuLink>
+                  )}
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
 
           {/* CTA & Phone */}
           <div className="hidden lg:flex items-center gap-5">
@@ -151,8 +168,7 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             className={`lg:hidden p-2 z-50 ${scrolled || isOpen ? 'text-[#1E293B]' : 'text-white'}`}
-            onClick={toggleMenu}
-            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
             aria-expanded={isOpen}
           >
@@ -168,39 +184,45 @@ export function Navbar() {
         }`}
         style={{ maxHeight: 'calc(100vh - 60px)', overflowY: 'auto' }}
       >
-        <div className="px-4 py-2">
+        <div className="px-4 py-2 space-y-1">
           {NAV_ITEMS.map((item) => (
             <div key={item.title} className="border-b border-[#F1F5F9]">
-              <div className="flex items-center justify-between">
+              {item.children ? (
+                <NavigationMenu viewport={false}>
+                  <NavigationMenuList className="flex-col items-start">
+                    <NavigationMenuItem>
+                      <NavigationMenuTrigger className="w-full justify-between py-4 font-semibold text-[#1E293B] text-lg bg-transparent hover:bg-transparent data-[state=open]:bg-transparent">
+                        {item.title}
+                        <ChevronDown className="w-5 h-5" />
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent className="absolute left-0 top-full">
+                        <ul className="w-[calc(100%-2rem)] bg-white rounded-lg border border-[#E2E8F0] p-1 ml-2">
+                          {item.children.map((child) => (
+                            <li key={child.title}>
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  href={child.href || "#"}
+                                  className="block px-4 py-3 text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#0A6CFF] rounded-lg"
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  {child.title}
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+                  </NavigationMenuList>
+                </NavigationMenu>
+              ) : (
                 <Link 
                   href={item.href || "#"}
-                  className="flex-1 block py-4 font-semibold text-[#1E293B] text-lg"
-                  onClick={handleLinkClick}
+                  className="block py-4 font-semibold text-[#1E293B] text-lg"
+                  onClick={() => setIsOpen(false)}
                 >
                   {item.title}
                 </Link>
-                {item.children && (
-                  <button
-                    onClick={(e) => toggleItem(e, item.title)}
-                    className="p-3 text-[#64748B] touch-manipulation"
-                  >
-                    <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${expandedItems.includes(item.title) ? 'rotate-180' : ''}`} />
-                  </button>
-                )}
-              </div>
-              {item.children && expandedItems.includes(item.title) && (
-                <div className="pb-2">
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.title}
-                      href={child.href || "#"}
-                      className="block py-3 pl-4 text-[#64748B] hover:text-[#0A6CFF] hover:bg-[#F1F5F9] rounded-lg transition-colors"
-                      onClick={handleLinkClick}
-                    >
-                      {child.title}
-                    </Link>
-                  ))}
-                </div>
               )}
             </div>
           ))}
