@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { TEAM_MEMBERS } from "@/lib/team";
 import { ArrowRight, Linkedin } from "lucide-react";
 
@@ -52,10 +53,12 @@ export function TeamSection() {
             >
               {/* Image Container */}
               <div className="relative aspect-[3/4] overflow-hidden">
-                <imgi
+                <Image
                   src={teamImages[member.id] || "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80"}
                   alt={member.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
 
                 {/* Gradient Overlay */}
