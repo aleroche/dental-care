@@ -72,7 +72,7 @@ export function FinancingSection() {
                 </p>
 
                 {/* Button - Better contrast */}
-                <button className="inline-flex items-center gap-2 text-sm font-bold text-[#0A6CFF] group-hover:gap-3 transition-all hover:text-[#0052CC]">
+                <button className="cursor-pointer inline-flex items-center gap-2 text-sm font-bold text-[#0A6CFF] group-hover:gap-3 transition-all hover:text-[#0052CC]">
                   Apply Now
                   <ArrowRight className="w-4 h-4" />
                 </button>

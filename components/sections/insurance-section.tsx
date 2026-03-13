@@ -56,7 +56,7 @@ export function InsuranceSection() {
           </div>
           <a 
             href="/contact"
-            className="inline-flex items-center gap-2 text-[#00B894] font-semibold text-sm hover:gap-3 transition-all"
+            className="cursor-pointer inline-flex items-center gap-2 text-[#00B894] font-semibold text-sm hover:gap-3 transition-all"
           >
             Contact Us
             <ArrowRight className="w-4 h-4" />

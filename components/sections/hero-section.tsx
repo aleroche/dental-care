@@ -66,11 +66,11 @@ export function HeroSection() {
 
             {/* CTA Buttons - Defined Colors */}
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <button className="group px-8 py-4 bg-[#0A6CFF] text-white text-lg font-semibold rounded-lg hover:bg-[#0052CC] transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-[#0A6CFF]/25 hover:scale-[1.02] active:scale-[0.98]">
+              <button className="cursor-pointer group px-8 py-4 bg-[#0A6CFF] text-white text-lg font-semibold rounded-lg hover:bg-[#0052CC] transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-[#0A6CFF]/25 hover:scale-[1.02] active:scale-[0.98]">
                 Book Your Appointment
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="px-8 py-4 border-2 border-white/30 text-white text-lg font-semibold rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
+              <button className="cursor-pointer px-8 py-4 border-2 border-white/30 text-white text-lg font-semibold rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
                 Call Us: (281) 555-0123
               </button>
             </div>

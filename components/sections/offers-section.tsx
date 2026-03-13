@@ -1,34 +1,34 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowRight, Sparkles, Calendar, Percent } from "lucide-react";
+import { ArrowRight, Users, Gift, HeartHandshake } from "lucide-react";
 
 const offers = [
   {
     id: 1,
-    icon: Sparkles,
-    title: "New Patient Special",
-    description: "Comprehensive exam, X-rays, and cleaning for only $99. A $350 value!",
+    icon: Users,
+    title: "New Patient Special: BOGO",
+    subtitle: "$75 total",
+    description: "Pay $75 for your exam and bring a friend or partner for a FREE exam.",
     cta: "Claim Offer",
-    discount: "$99",
     color: "primary",
   },
   {
     id: 2,
-    icon: Calendar,
-    title: "Free Consultation",
-    description: "Free orthodontic consultation for braces or aligners. No commitment required.",
-    cta: "Book Now",
-    discount: "FREE",
+    icon: Gift,
+    title: "Free Whitening Kit",
+    subtitle: "After treatment",
+    description: "Complete your treatment and receive a free take-home whitening kit as our thank-you.",
+    cta: "Learn More",
     color: "accent",
   },
   {
     id: 3,
-    icon: Percent,
-    title: "Teeth Whitening Promo",
-    description: "Get professional whitening for just $199. Regular price $450.",
-    cta: "Learn More",
-    discount: "$199",
+    icon: HeartHandshake,
+    title: "Loyalty Program",
+    subtitle: "First month FREE",
+    description: "Join our Loyalty Program and get your first month free. Enjoy member savings and perks year-round.",
+    cta: "Sign Up Now",
     color: "primary",
   },
 ];
@@ -42,89 +42,79 @@ export function OffersSection() {
   }, []);
 
   return (
-    <section className="py-20 bg-white relative overflow-hidden">
+    <section className="py-20 relative overflow-hidden bg-white dark:bg-[#0F172A]">
       {/* Background Decorations */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-[#0A6CFF]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-64 h-64 bg-[#00B894]/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/3 right-1/4 w-20 h-20 border border-[#0A6CFF]/10 rounded-full" />
-        <div className="absolute bottom-1/4 left-1/4 w-16 h-16 border border-[#00B894]/10 rounded-full" />
+        <div className="absolute top-20 left-10 w-64 h-64 bg-[#0A6CFF]/5 dark:bg-[#0A6CFF]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-64 h-64 bg-[#00B894]/5 dark:bg-[#00B894]/10 rounded-full blur-3xl" />
       </div>
 
       <div className="container-wide relative z-10">
         {/* Section Header */}
-        <div className={`text-center mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <span className="inline-block px-4 py-1.5 bg-[#00B894]/10 text-[#009975] text-sm font-semibold rounded-full mb-4">
+        <div className={`text-center mb-12 transition-none ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <span className="inline-block px-4 py-1.5 text-sm font-semibold rounded-full mb-4 bg-[#00B894]/10 dark:bg-[#00B894]/20 text-[#009975] dark:text-[#00D9A5]">
             Limited Time Offers
           </span>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#1E293B] mb-4">
+          <h2 className="font-serif text-3xl md:text-4xl mb-4 text-[#1E293B] dark:text-white">
             Special Offers Just for You
           </h2>
-          <p className="text-[#64748B] max-w-2xl mx-auto">
+          <p className="max-w-2xl mx-auto text-[#64748B] dark:text-[#94A3B8]">
             Take advantage of our exclusive promotions and save on quality dental care for you and your family.
           </p>
         </div>
 
-        {/* Offers Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Offers Grid - Minimalist */}
+        <div className="grid md:grid-cols-3 gap-6">
           {offers.map((offer, index) => (
             <div
               key={offer.id}
-              className={`group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-[#E2E8F0] overflow-hidden ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-              style={{ transitionDelay: `${300 + index * 150}ms` }}
+              className={`group relative rounded-2xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 border duration-0 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                } bg-white dark:bg-[#1E293B] border-[#E2E8F0] dark:border-[#334155] hover:border-[#0A6CFF]/30 dark:hover:border-[#0A6CFF]/30`}
+              style={{ transitionDelay: `${300 + index * 100}ms` }}
             >
-              {/* Background Accent */}
-              <div className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl opacity-10 transition-opacity duration-500 group-hover:opacity-20 ${
-                offer.color === 'primary' ? 'bg-[#0A6CFF]' : 'bg-[#00B894]'
-              }`} />
-
-              {/* Discount Badge */}
-              <div className={`absolute -top-4 -right-4 w-20 h-20 rounded-full flex items-center justify-center shadow-lg z-10 ${
-                offer.color === 'primary' ? 'bg-[#0A6CFF]' : 'bg-[#00B894]'
-              }`}>
-                <span className="text-white font-bold text-sm">{offer.discount}</span>
-              </div>
-
               {/* Icon */}
-              <div className={`relative w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mt-2 transition-transform duration-300 group-hover:scale-110 ${
-                offer.color === 'primary' 
-                  ? 'bg-[#0A6CFF]/10 text-[#0A6CFF]' 
-                  : 'bg-[#00B894]/10 text-[#00B894]'
-              }`}>
-                <offer.icon className="w-8 h-8" />
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 duration-0 ${offer.color === 'primary'
+                  ? 'bg-[#0A6CFF]/10 dark:bg-[#0A6CFF]/20 text-[#0A6CFF] dark:text-[#4D94FF]'
+                  : 'bg-[#00B894]/10 dark:bg-[#00B894]/20 text-[#00B894] dark:text-[#00D9A5]'
+                }`}>
+                <offer.icon className="w-6 h-6" />
               </div>
 
-              {/* Content */}
-              <h3 className="font-serif text-2xl text-[#1E293B] mb-3">
+              {/* Subtitle */}
+              {offer.subtitle && (
+                <span className={`text-xs font-bold uppercase tracking-wide mb-1 block duration-0 ${offer.color === 'primary'
+                    ? 'text-[#0A6CFF] dark:text-[#4D94FF]'
+                    : 'text-[#00B894] dark:text-[#00D9A5]'
+                  }`}>
+                  {offer.subtitle}
+                </span>
+              )}
+
+              {/* Title */}
+              <h3 className="font-serif text-xl mb-2 text-[#1E293B] dark:text-white duration-0">
                 {offer.title}
               </h3>
-              <p className="text-[#64748B] mb-6 leading-relaxed">
+
+              {/* Description */}
+              <p className="text-sm mb-6 leading-relaxed text-[#64748B] dark:text-[#94A3B8] duration-0">
                 {offer.description}
               </p>
 
-              {/* CTA - Defined Colors */}
-              <button className={`group/btn inline-flex items-center gap-2 font-semibold transition-colors duration-300 ${
-                offer.color === 'primary'
-                  ? 'text-[#0A6CFF] hover:text-[#0052CC]'
-                  : 'text-[#00B894] hover:text-[#009975]'
-              }`}>
-                {offer.cta}
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+              {/* CTA Button */}
+              <button className={`w-full py-3 px-5 rounded-lg font-medium flex items-center justify-center gap-2 cursor-pointer duration-0 ${offer.color === 'primary'
+                  ? 'bg-[#0A6CFF] text-white hover:bg-[#0052CC] dark:hover:bg-[#4D94FF]'
+                  : 'bg-[#00B894] text-white hover:bg-[#009975] dark:hover:bg-[#00D9A5]'
+                }`}>
+                Book your offer
+                <ArrowRight className="w-4 h-4" />
               </button>
-
-              {/* Border Gradient on Hover */}
-              <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10 ${
-                offer.color === 'primary'
-                  ? 'bg-gradient-to-r from-[#0A6CFF]/10 to-transparent'
-                  : 'bg-gradient-to-r from-[#00B894]/10 to-transparent'
-              }`} />
             </div>
           ))}
         </div>
 
         {/* Bottom Note */}
-        <p className={`text-center text-[#94A3B8] text-sm mt-12 transition-all duration-700 delay-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-          *Offers valid for new patients. Cannot be combined with insurance.
+        <p className={`text-center text-sm mt-10 transition-none ${isLoaded ? 'opacity-100' : 'opacity-0'} text-[#94A3B8] dark:text-[#475569]`}>
+          *Offers cannot be combined with insurance. Restrictions may apply.
         </p>
       </div>
     </section>

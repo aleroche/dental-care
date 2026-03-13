@@ -90,7 +90,7 @@ export function BilingualSection() {
             </p>
 
             {/* Button - Better contrast */}
-            <button className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#006B52] font-bold rounded-lg hover:bg-[#F1F5F9] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg">
+            <button className="cursor-pointer inline-flex items-center gap-3 px-8 py-4 bg-white text-[#006B52] font-bold rounded-lg hover:bg-[#F1F5F9] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg">
               Meet Our Team
               <ArrowRight className="w-5 h-5" />
             </button>

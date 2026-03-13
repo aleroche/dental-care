@@ -79,7 +79,7 @@ export function ServicesSection() {
                   {service.description}
                 </p>
 
-                <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#0A6CFF] group-hover:gap-3 transition-all">
+                <span className="cursor-pointer inline-flex items-center gap-2 text-sm font-semibold text-[#0A6CFF] group-hover:gap-3 transition-all">
                   Learn More
                   <ArrowRight className="w-4 h-4" />
                 </span>
@@ -95,7 +95,7 @@ export function ServicesSection() {
         <div className={`text-center mt-12 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '800ms' }}>
           <a 
             href="/services"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-[#0A6CFF] text-white font-semibold rounded-lg hover:bg-[#0052CC] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#0A6CFF]/25"
+            className="cursor-pointer inline-flex items-center gap-3 px-8 py-4 bg-[#0A6CFF] text-white font-semibold rounded-lg hover:bg-[#0052CC] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#0A6CFF]/25"
           >
             View All Services
             <ArrowRight className="w-5 h-5" />

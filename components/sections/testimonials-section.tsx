@@ -102,7 +102,7 @@ export function TestimonialsSection() {
             href="https://google.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-6 py-3 bg-white border border-[#E2E8F0] rounded-lg hover:border-[#0A6CFF]/30 hover:shadow-lg transition-all"
+            className="cursor-pointer inline-flex items-center gap-3 px-6 py-3 bg-white border border-[#E2E8F0] rounded-lg hover:border-[#0A6CFF]/30 hover:shadow-lg transition-all"
           >
             <div className="flex gap-0.5">
               {[...Array(5)].map((_, i) => (

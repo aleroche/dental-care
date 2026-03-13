@@ -56,7 +56,7 @@ export function Footer() {
                   href={SOCIAL.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center hover:bg-[#00B894] hover:scale-110 transition-all duration-200"
+                  className="cursor-pointer w-9 h-9 rounded-full bg-white/20 flex items-center justify-center hover:bg-[#00B894] hover:scale-110 transition-all duration-200"
                 >
                   <Facebook className="w-4 h-4" />
                 </a>
@@ -66,7 +66,7 @@ export function Footer() {
                   href={SOCIAL.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center hover:bg-[#00B894] hover:scale-110 transition-all duration-200"
+                  className="cursor-pointer w-9 h-9 rounded-full bg-white/20 flex items-center justify-center hover:bg-[#00B894] hover:scale-110 transition-all duration-200"
                 >
                   <Instagram className="w-4 h-4" />
                 </a>
@@ -89,7 +89,7 @@ export function Footer() {
                 <li key={item}>
                   <Link 
                     href="#"
-                    className="text-white/70 hover:text-[#00B894] hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 group"
+                    className="cursor-pointer text-white/70 hover:text-[#00B894] hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 group"
                   >
                     <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0" />
                     {item}
@@ -115,7 +115,7 @@ export function Footer() {
                 <li key={service}>
                   <Link 
                     href="#"
-                    className="text-white/70 hover:text-[#00B894] hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 group"
+                    className="cursor-pointer text-white/70 hover:text-[#00B894] hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 group"
                   >
                     <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0" />
                     {service}
@@ -172,25 +172,25 @@ export function Footer() {
 
             {/* Legal Links - Better hover */}
             <div className="flex flex-wrap gap-4 text-sm">
-              <Link href="/privacy" className="text-white/50 hover:text-white transition-colors">
+              <Link href="/privacy" className="cursor-pointer text-white/50 hover:text-white transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/hipaa" className="text-white/50 hover:text-white transition-colors">
+              <Link href="/hipaa" className="cursor-pointer text-white/50 hover:text-white transition-colors">
                 HIPAA
               </Link>
-              <Link href="#" className="text-white/50 hover:text-white transition-colors">
+              <Link href="#" className="cursor-pointer text-white/50 hover:text-white transition-colors">
                 New Patient Form
               </Link>
-              <Link href="#" className="text-white/50 hover:text-white transition-colors">
+              <Link href="#" className="cursor-pointer text-white/50 hover:text-white transition-colors">
                 Privacy Practice Notice
               </Link>
             </div>
 
             {/* Language Toggle */}
             <div className="flex items-center gap-2 text-sm">
-              <button className="text-white/50 hover:text-white transition-colors">Español</button>
+              <button className="cursor-pointer text-white/50 hover:text-white transition-colors">Español</button>
               <span className="text-white/30">|</span>
-              <button className="text-white font-medium">English</button>
+              <button className="cursor-pointer text-white font-medium">English</button>
             </div>
           </div>
           

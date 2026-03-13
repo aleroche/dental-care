@@ -1,38 +1,23 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Clock, CreditCard, Languages, ShieldCheck, Stethoscope, Users, Wrench } from "lucide-react";
+import { Monitor, Building2, HeartHandshake, Wrench, CreditCard } from "lucide-react";
 
 const features = [
   {
-    icon: Clock,
-    title: "Same-Day Emergency Care",
-    description: "Dental emergencies don't wait. We offer same-day appointments for urgent dental needs.",
+    icon: Monitor,
+    title: "Latest Dental equipment",
+    description: "We use the most modern techniques and technologies to make our procedures and diagnoses more accurate.",
   },
   {
-    icon: Users,
-    title: "Accepting New Patients",
-    description: "We're always welcoming new families. Schedule your first visit today and join our dental family.",
+    icon: Building2,
+    title: "Private offices",
+    description: "The privacy of the space for consultations and treatments, and the comfort in it are highly valued by our patients.",
   },
   {
-    icon: CreditCard,
-    title: "Most Insurance Accepted",
-    description: "We work with major dental insurance providers to maximize your benefits.",
-  },
-  {
-    icon: Wrench,
-    title: "Flexible Payment Plans",
-    description: "Quality dental care fits your budget. We offer financing options to make treatment affordable.",
-  },
-  {
-    icon: Stethoscope,
-    title: "State-of-the-Art Technology",
-    description: "Advanced dental equipment for precise diagnoses and comfortable, efficient treatments.",
-  },
-  {
-    icon: Languages,
-    title: "Bilingual Staff",
-    description: "Our team speaks both English and Spanish, ensuring clear communication for all patients.",
+    icon: HeartHandshake,
+    title: "Affordable dentist for the family",
+    description: "We offer a high quality service with affordable prices and with payment facilities and financing plans.",
   },
 ];
 
@@ -45,46 +30,46 @@ export function WhyUsSection() {
   }, []);
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-24 bg-white dark:bg-[#0F172A] relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#F8FAFC] to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#F8FAFC] to-transparent" />
-        <div className="absolute top-1/4 -right-20 w-80 h-80 bg-[#0A6CFF]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -left-20 w-80 h-80 bg-[#00B894]/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#F8FAFC] dark:from-[#0F172A] to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#F8FAFC] dark:from-[#0F172A] to-transparent" />
+        <div className="absolute top-1/4 -right-20 w-80 h-80 bg-[#0A6CFF]/5 dark:bg-[#0A6CFF]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -left-20 w-80 h-80 bg-[#00B894]/5 dark:bg-[#00B894]/10 rounded-full blur-3xl" />
       </div>
 
       <div className="container-wide relative z-10">
         {/* Header */}
         <div className={`text-center mb-16 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <span className="inline-block px-4 py-1.5 mb-4 text-sm font-semibold text-[#00B894] uppercase bg-[#00B894]/10 rounded-full">
+          <span className="inline-block px-4 py-1.5 mb-4 text-sm font-semibold text-[#00B894] dark:text-[#00D9A5] uppercase bg-[#00B894]/10 dark:bg-[#00B894]/20 rounded-full">
             Why Choose Us
           </span>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#1E293B] mb-4">
-            Why We Are Your Best Choice
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#1E293B] dark:text-white mb-4">
+            We are a quality, humane and professional dental office, at the forefront of technology
           </h2>
-          <p className="text-[#64748B] max-w-2xl mx-auto">
+          <p className="text-[#64748B] dark:text-[#94A3B8] max-w-2xl mx-auto">
             Experience the difference of a dental practice that truly cares about your family's oral health.
           </p>
         </div>
 
         {/* Features Grid - 3 columns as per SPEC */}
         <div className="grid md:grid-cols-3 gap-8">
-          {features.slice(0, 3).map((feature, index) => (
+          {features.map((feature, index) => (
             <div
               key={index}
-              className={`group p-8 bg-white rounded-2xl border border-[#E2E8F0] hover:border-[#0A6CFF]/20 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+              className={`group p-8 bg-white dark:bg-[#1E293B] rounded-2xl border border-[#E2E8F0] dark:border-[#334155] hover:border-[#0A6CFF]/20 dark:hover:border-[#0A6CFF]/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
               style={{ transitionDelay: `${200 + index * 150}ms` }}
             >
-              <div className="w-14 h-14 rounded-2xl bg-[#00B894]/10 flex items-center justify-center mb-5 group-hover:bg-[#00B894] group-hover:scale-110 transition-all duration-300">
-                <feature.icon className="w-7 h-7 text-[#00B894] group-hover:text-white transition-colors" />
+              <div className="w-14 h-14 rounded-2xl bg-[#0A6CFF]/10 dark:bg-[#0A6CFF]/20 flex items-center justify-center mb-5 group-hover:bg-[#0A6CFF] group-hover:scale-110 transition-all duration-300">
+                <feature.icon className="w-7 h-7 text-[#0A6CFF] dark:text-[#4D94FF] group-hover:text-white transition-colors" />
               </div>
               
-              <h3 className="font-serif text-xl text-[#1E293B] mb-3">
+              <h3 className="font-serif text-xl text-[#1E293B] dark:text-white mb-3">
                 {feature.title}
               </h3>
               
-              <p className="text-[#64748B] text-sm leading-relaxed">
+              <p className="text-[#64748B] dark:text-[#94A3B8] text-sm leading-relaxed">
                 {feature.description}
               </p>
             </div>

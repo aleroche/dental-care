@@ -55,6 +55,7 @@ const NAV_ITEMS = [
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -72,17 +73,46 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isDark = mounted && theme === 'dark';
+
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
+  const toggleSubmenu = (title: string) => {
+    setOpenSubmenu(openSubmenu === title ? null : title);
+  };
+
+  const headerBg = scrolled || isOpen 
+    ? 'bg-white dark:bg-[#0F172A] shadow-sm' 
+    : isDark 
+      ? 'bg-[#0F172A]/95 dark:bg-[#0F172A]/95 backdrop-blur-md' 
+      : 'bg-[#020617]/95 backdrop-blur-md';
+      
+  const headerPy = scrolled || isOpen ? 'py-3' : 'py-4';
+  
+  const textColor = scrolled || isOpen 
+    ? 'text-[#1E293B] dark:text-white' 
+    : 'text-white';
+    
+  const mutedColor = scrolled || isOpen 
+    ? 'text-[#64748B] dark:text-[#94A3B8]' 
+    : 'text-white/60';
+
+  const navLinkColor = scrolled || isOpen
+    ? 'text-[#475569] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] hover:text-[#0A6CFF]'
+    : 'text-white/80 hover:bg-white/10 hover:text-white';
+
+  const mobileMenuBg = 'bg-white dark:bg-[#0F172A]';
+  const mobileBorderColor = 'border-[#E2E8F0] dark:border-[#334155]';
+  const mobileTextColor = 'text-[#1E293B] dark:text-white';
+  const mobileMutedColor = 'text-[#64748B] dark:text-[#94A3B8]';
+  const mobileHoverColor = 'hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B]';
+  const mobileAccentColor = 'hover:text-[#0A6CFF] dark:hover:text-[#4D94FF]';
+
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled || isOpen
-          ? 'bg-white shadow-sm py-3' 
-          : 'bg-[#020617]/95 backdrop-blur-md py-4'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBg} ${headerPy}`}
     >
       <div className="container-wide">
         <div className="flex items-center justify-between">
@@ -92,19 +122,19 @@ export function Navbar() {
               <div className="w-11 h-11 rounded-full bg-[#0A6CFF] flex items-center justify-center">
                 <span className="text-white font-serif text-xl font-bold">M</span>
               </div>
-              <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-[#00B894] rounded-full border-2 border-white" />
+              <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-[#00B894] rounded-full border-2 border-white dark:border-[#0F172A]" />
             </div>
             <div>
-              <span className={`font-serif text-xl font-semibold transition-all ${scrolled || isOpen ? 'text-[#1E293B]' : 'text-white'}`}>
+              <span className={`font-serif text-xl font-semibold transition-all ${textColor}`}>
                 MiraMar
               </span>
-              <span className={`block -mt-0.5 ${scrolled || isOpen ? 'text-[#64748B] text-xs' : 'text-white/60 text-xs'}`}>
+              <span className={`block -mt-0.5 ${mutedColor} text-xs`}>
                 Family Dental
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation with Shadcn NavigationMenu - Positioned per item */}
+          {/* Desktop Navigation */}
           <NavigationMenu className="hidden lg:flex" viewport={false}>
             <NavigationMenuList className="gap-1">
               {NAV_ITEMS.map((item) => (
@@ -113,21 +143,18 @@ export function Navbar() {
                     <>
                       <NavigationMenuTrigger className={`
                         inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors bg-transparent 
-                        ${scrolled 
-                          ? 'text-[#475569] hover:bg-[#F1F5F9] hover:text-[#0A6CFF]' 
-                          : 'text-white/80 hover:bg-white/10 hover:text-white'
-                        }
+                        ${navLinkColor}
                       `}>
                         {item.title}
                       </NavigationMenuTrigger>
-                      <NavigationMenuContent className="absolute left-0 top-full mt-1">
-                        <ul className="w-56 bg-white p-1">
+                      <NavigationMenuContent className="absolute left-0 top-full mt-1 !bg-transparent !border-0 !shadow-none">
+                        <ul className="w-56 bg-white dark:bg-[#1E293B] p-1 rounded-lg shadow-xl dark:shadow-2xl">
                           {item.children.map((child) => (
                             <li key={child.title}>
                               <NavigationMenuLink asChild>
                                 <Link
                                   href={child.href || "#"}
-                                  className="block px-4 py-2.5 text-sm text-[#475569] hover:bg-[#F1F5F9] hover:text-[#0A6CFF] rounded-lg cursor-pointer"
+                                  className="block px-4 py-2.5 text-sm text-[#475569] dark:text-[#CBD5E1] hover:bg-[#F1F5F9] dark:hover:bg-[#0A6CFF]/20 hover:text-[#0A6CFF] dark:hover:text-[#4D94FF] rounded-md cursor-pointer transition-colors"
                                 >
                                   {child.title}
                                 </Link>
@@ -143,10 +170,7 @@ export function Navbar() {
                         href={item.href || "#"}
                         className={`
                           inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors bg-transparent
-                          ${scrolled 
-                            ? 'text-[#475569] hover:bg-[#F1F5F9] hover:text-[#0A6CFF]' 
-                            : 'text-white/80 hover:bg-white/10 hover:text-white'
-                          }
+                          ${navLinkColor}
                         `}
                       >
                         {item.title}
@@ -163,14 +187,14 @@ export function Navbar() {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className={`p-2.5 rounded-lg transition-colors ${
-                scrolled 
-                  ? 'text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#0A6CFF]' 
+              className={`cursor-pointer p-2.5 rounded-lg transition-colors ${
+                scrolled || isOpen
+                  ? 'text-[#64748B] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] hover:text-[#0A6CFF] dark:hover:text-[#4D94FF]'
                   : 'text-white/80 hover:bg-white/10 hover:text-white'
               }`}
               aria-label="Toggle theme"
             >
-              {mounted && theme === 'dark' ? (
+              {isDark ? (
                 <Sun className="w-5 h-5" />
               ) : (
                 <Moon className="w-5 h-5" />
@@ -178,14 +202,14 @@ export function Navbar() {
             </button>
             <a 
               href="tel:+12815550123" 
-              className={`flex items-center gap-2 transition-colors ${scrolled ? 'text-[#64748B] hover:text-[#0A6CFF]' : 'text-white/80 hover:text-white'}`}
+              className={`flex items-center gap-2 transition-colors ${scrolled || isOpen ? 'text-[#64748B] dark:text-[#94A3B8] hover:text-[#0A6CFF] dark:hover:text-[#4D94FF]' : 'text-white/80 hover:text-white'}`}
             >
               <Phone className="w-4 h-4" />
               <span className="text-sm font-medium">(281) 555-0123</span>
             </a>
             <Link
               href="/contact"
-              className="px-6 py-2.5 bg-[#0A6CFF] text-white text-sm font-semibold rounded-lg hover:bg-[#0052CC] transition-all duration-300 hover:shadow-lg hover:shadow-[#0A6CFF]/25"
+              className="cursor-pointer px-6 py-2.5 bg-[#0A6CFF] text-white text-sm font-semibold rounded-lg hover:bg-[#0052CC] transition-all duration-300 hover:shadow-lg hover:shadow-[#0A6CFF]/25"
             >
               Book Now
             </Link>
@@ -193,7 +217,7 @@ export function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className={`lg:hidden p-2 z-50 ${scrolled || isOpen ? 'text-[#1E293B]' : 'text-white'}`}
+            className={`cursor-pointer lg:hidden p-2 z-50 ${textColor}`}
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
             aria-expanded={isOpen}
@@ -205,46 +229,46 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       <div 
-        className={`lg:hidden absolute top-full left-0 right-0 bg-white shadow-xl border-t border-[#E2E8F0] transition-all duration-200 ease-out ${
+        className={`lg:hidden absolute top-full left-0 right-0 ${mobileMenuBg} shadow-xl border-t ${mobileBorderColor} transition-all duration-200 ease-out ${
           isOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2 pointer-events-none'
         }`}
         style={{ maxHeight: 'calc(100vh - 60px)', overflowY: 'auto' }}
       >
         <div className="px-4 py-2 space-y-1">
           {NAV_ITEMS.map((item) => (
-            <div key={item.title} className="border-b border-[#F1F5F9]">
+            <div key={item.title} className={`border-b ${mobileBorderColor}`}>
               {item.children ? (
-                <NavigationMenu viewport={false}>
-                  <NavigationMenuList className="flex-col items-start">
-                    <NavigationMenuItem>
-                      <NavigationMenuTrigger className="w-full justify-between py-4 font-semibold text-[#1E293B] text-lg bg-transparent hover:bg-transparent data-[state=open]:bg-transparent">
-                        {item.title}
-                        <ChevronDown className="w-5 h-5" />
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="absolute left-0 top-full">
-                        <ul className="w-[calc(100%-2rem)] bg-white rounded-lg border border-[#E2E8F0] p-1 ml-2">
-                          {item.children.map((child) => (
-                            <li key={child.title}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  href={child.href || "#"}
-                                  className="block px-4 py-3 text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#0A6CFF] rounded-lg"
-                                  onClick={() => setIsOpen(false)}
-                                >
-                                  {child.title}
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
-                  </NavigationMenuList>
-                </NavigationMenu>
+                <div>
+                  <button
+                    onClick={() => toggleSubmenu(item.title)}
+                    className={`w-full flex items-center justify-between py-4 font-semibold ${mobileTextColor} text-lg bg-transparent hover:bg-transparent cursor-pointer`}
+                  >
+                    {item.title}
+                    <ChevronDown className={`w-5 h-5 transition-transform ${openSubmenu === item.title ? 'rotate-180' : ''}`} />
+                  </button>
+                  <div className={`overflow-hidden transition-all duration-200 ${openSubmenu === item.title ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                    <ul className={`pb-2 space-y-1`}>
+                      {item.children.map((child) => (
+                        <li key={child.title}>
+                          <Link
+                            href={child.href || "#"}
+                            className={`block px-4 py-3 ${mobileMutedColor} ${mobileHoverColor} ${mobileAccentColor} rounded-lg cursor-pointer transition-colors`}
+                            onClick={() => {
+                              setIsOpen(false);
+                              setOpenSubmenu(null);
+                            }}
+                          >
+                            {child.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               ) : (
                 <Link 
                   href={item.href || "#"}
-                  className="block py-4 font-semibold text-[#1E293B] text-lg"
+                  className={`block py-4 font-semibold ${mobileTextColor} text-lg`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.title}
@@ -255,7 +279,7 @@ export function Navbar() {
           <div className="pt-4 pb-4">
             <Link
               href="/contact"
-              className="block w-full text-center px-6 py-4 bg-[#0A6CFF] text-white font-semibold rounded-lg"
+              className="block w-full text-center px-6 py-4 bg-[#0A6CFF] text-white font-semibold rounded-lg cursor-pointer"
               onClick={() => setIsOpen(false)}
             >
               Book Appointment

@@ -66,7 +66,7 @@ export function TeamSection() {
 
                 {/* Social Button */}
                 <div className="absolute bottom-6 left-6 right-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/20 backdrop-blur-sm text-white rounded-lg text-sm font-semibold hover:bg-white/30 transition-colors">
+                  <button className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 bg-white/20 backdrop-blur-sm text-white rounded-lg text-sm font-semibold hover:bg-white/30 transition-colors">
                     <Linkedin className="w-4 h-4" />
                     View Profile
                   </button>
@@ -93,7 +93,7 @@ export function TeamSection() {
         <div className={`text-center mt-12 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '700ms' }}>
           <a
             href="/contact"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-[#1E293B] text-white font-semibold rounded-lg hover:bg-[#0A6CFF] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+            className="cursor-pointer inline-flex items-center gap-3 px-8 py-4 bg-[#1E293B] text-white font-semibold rounded-lg hover:bg-[#0A6CFF] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
           >
             Schedule Your Visit
             <ArrowRight className="w-5 h-5" />
