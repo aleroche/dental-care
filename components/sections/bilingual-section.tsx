@@ -40,27 +40,15 @@ export function BilingualSection() {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#006B52]/60 via-transparent to-transparent" />
-              
-              {/* Language Badges - Better contrast */}
-              <div className="absolute bottom-6 left-6 right-6 flex items-center justify-center gap-6">
-                <div className="bg-[#1E293B]/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg flex items-center gap-3 border border-white/20">
-                  <span className="text-2xl">🇺🇸</span>
-                  <span className="font-semibold text-white">English</span>
-                </div>
-                <div className="bg-[#1E293B]/90 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg flex items-center gap-3 border border-white/20">
-                  <span className="text-2xl">🇪🇸</span>
-                  <span className="font-semibold text-white">Español</span>
-                </div>
-              </div>
             </div>
 
             {/* Floating Badge */}
-            <div className="absolute -bottom-5 -right-5 bg-white rounded-xl p-5 shadow-xl hidden md:block">
+            <div className="absolute -bottom-5 -right-5 bg-white dark:bg-[#1E293B] rounded-xl p-5 shadow-xl hidden md:block">
               <div className="flex items-center gap-3">
-                <Globe2 className="w-8 h-8 text-[#00896B]" />
+                <Globe2 className="w-8 h-8 text-[#00896B] dark:text-[#00D9A5]" />
                 <div>
-                  <p className="font-bold text-[#1E293B] text-sm">Bilingual Care</p>
-                  <p className="text-xs text-[#64748B]">English & Spanish</p>
+                  <p className="font-bold text-[#1E293B] dark:text-white text-sm">Bilingual Care</p>
+                  <p className="text-xs text-[#64748B] dark:text-[#94A3B8]">English & Spanish</p>
                 </div>
               </div>
             </div>

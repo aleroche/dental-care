@@ -9,57 +9,66 @@ export interface Service {
 
 export const SERVICES: Service[] = [
   {
-    id: "dental-cleanings",
-    title: "Dental Cleanings",
-    description: "Professional teeth cleaning to maintain oral health.",
-    href: "/services/dental-cleanings",
+    id: "preventive-dentistry",
+    title: "Preventive Dentistry",
+    description: "Stop problems before they start.",
+    href: "/services/preventive-dentistry",
   },
+
   {
-    id: "dental-implants",
-    title: "Dental Implants",
-    description: "Permanent tooth replacement solutions.",
-    href: "/services/dental-implants",
+    id: "oral-surgery",
+    title: "Oral Surgery",
+    description: "Specialized surgical procedures for complex dental issues.",
+    href: "/services/oral-surgery",
   },
+
+  {
+    id: "restorative-dentistry",
+    title: "Restorative Dentistry",
+    description: "Restore your smile with advanced restorative procedures.",
+    href: "/services/restorative-dentistry",
+  },
+
+  {
+    id: "endodontics",
+    title: "Endodontics",
+    description: "Specialized treatment for the dental pulp and surrounding tissues.",
+    href: "/services/endodontics",
+  },
+
   {
     id: "cosmetic-dentistry",
     title: "Cosmetic Dentistry",
     description: "Enhance your smile with modern cosmetic procedures.",
     href: "/services/cosmetic-dentistry",
   },
+
+  {
+    id: "periodontics",
+    title: "Periodontics",
+    description: "Specialized treatment for the gums and supporting structures.",
+    href: "/services/periodontics",
+  },
+
   {
     id: "orthodontics",
     title: "Orthodontics",
     description: "Straighten your teeth with braces or aligners.",
     href: "/services/orthodontics",
   },
-  {
-    id: "root-canals",
-    title: "Root Canals",
-    description: "Save infected teeth with root canal therapy.",
-    href: "/services/root-canals",
-  },
+
   {
     id: "pediatric-dentistry",
     title: "Pediatric Dentistry",
     description: "Gentle dental care for children.",
     href: "/services/pediatric-dentistry",
   },
+
   {
-    id: "teeth-whitening",
-    title: "Teeth Whitening",
-    description: "Brighten your smile with professional whitening.",
-    href: "/services/teeth-whitening",
+    id: "other-services-and-treatments",
+    title: "Other Services and Treatments",
+    description: "Additional dental services to meet your needs.",
+    href: "/services/other-services-and-treatments",
   },
-  {
-    id: "emergency-dental",
-    title: "Emergency Dental Care",
-    description: "Urgent dental care when you need it most.",
-    href: "/services/emergency-dental",
-  },
-  {
-    id: "preventive-dentistry",
-    title: "Preventive Dentistry",
-    description: "Stop problems before they start.",
-    href: "/services/preventive-dentistry",
-  },
+
 ];

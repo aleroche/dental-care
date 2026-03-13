@@ -5,15 +5,24 @@ import { SERVICES } from "@/lib/services";
 import { ArrowRight } from "lucide-react";
 
 const serviceImages: Record<string, string> = {
-  "dental-cleanings": "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=80",
-  "dental-implants": "https://images.unsplash.com/photo-1629909615184-74f495363b67?w=600&q=80",
-  "cosmetic-dentistry": "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&q=80",
-  "orthodontics": "https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=600&q=80",
-  "root-canals": "https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?w=600&q=80",
-  "pediatric-dentistry": "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=600&q=80",
-  "teeth-whitening": "https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?w=600&q=80",
-  "emergency-dental": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=80",
-  "preventive-dentistry": "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=80",
+  "preventive-dentistry": "https://miramarfamilydental.com/wp-content/uploads/2024/03/servicios-odontologia-preventiva-1024x1024.webp",
+
+  "oral-surgery": "https://miramarfamilydental.com/wp-content/uploads/2024/03/servicios-cirugia-1024x1024.webp",
+
+  "restorative-dentistry": "https://miramarfamilydental.com/wp-content/uploads/2024/03/image-1-1024x1024.webp",
+
+  "endodontics": "https://miramarfamilydental.com/wp-content/uploads/2024/03/servicios-endodoncia-1-1024x1024.webp",
+
+  "cosmetic-dentistry": "https://miramarfamilydental.com/wp-content/uploads/2024/03/servicios-cosmetica-sonrisa-1024x1024.webp",
+
+  "periodontics": "https://miramarfamilydental.com/wp-content/uploads/2024/03/servicios-oral-surgery-1024x1024.webp",
+
+  "orthodontics": "https://miramarfamilydental.com/wp-content/uploads/2024/03/servicios-ortodoncia-1024x1024.webp",
+
+  "pediatric-dentistry": "https://miramarfamilydental.com/wp-content/uploads/2024/03/servicios-odontontologia-pediatrica-1024x1024.webp",
+
+  "other-services-and-treatments": "https://miramarfamilydental.com/wp-content/uploads/2024/03/servicios-otros-tratamientos-ferula-de-descarga-1-1024x683.webp",
+
 };
 
 export function ServicesSection() {
@@ -42,7 +51,7 @@ export function ServicesSection() {
             Comprehensive Dental Care for the Whole Family
           </h2>
           <p className="text-[#64748B] max-w-2xl mx-auto">
-            From routine cleanings to advanced procedures, we offer a full range of 
+            From routine cleanings to advanced procedures, we offer a full range of
             dental services to meet all your oral health needs.
           </p>
         </div>
@@ -58,13 +67,13 @@ export function ServicesSection() {
             >
               {/* Image Background */}
               <div className="relative h-48 overflow-hidden">
-                <img 
+                <img
                   src={serviceImages[service.id] || serviceImages["dental-cleanings"]}
                   alt={service.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/70 via-transparent to-transparent" />
-                
+
                 {/* Title Overlay */}
                 <div className="absolute bottom-4 left-4 right-4">
                   <h3 className="font-serif text-xl text-white font-semibold">
@@ -93,7 +102,7 @@ export function ServicesSection() {
 
         {/* View All Services - Defined Button Color */}
         <div className={`text-center mt-12 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '800ms' }}>
-          <a 
+          <a
             href="/services"
             className="cursor-pointer inline-flex items-center gap-3 px-8 py-4 bg-[#0A6CFF] text-white font-semibold rounded-lg hover:bg-[#0052CC] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#0A6CFF]/25"
           >
