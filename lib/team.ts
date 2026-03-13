@@ -12,7 +12,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     name: "Dr Keyttia Beovides",
     title: "Dentist",
     description:
-      "Dr. Beovides is dedicated to providing exceptional dental care with a compassionate approach.",
+      "Dr. Keyttia Beovides is the founder of MiraMar Family Dental, dedicated to improving smiles and helping patients understand the value of lifelong oral health. She provides compassionate care for families in Katy, Cypress, and the Houston area.",
     image: "/images/team/dr-keyttia-beovides.jpg",
   },
   {
@@ -20,7 +20,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     name: "Dr Tihany Rodriguez",
     title: "Dentist",
     description:
-      "Dr. Rodriguez specializes in creating beautiful, healthy smiles for the whole family.",
+      "Dr. Tihany Rodriguez combines international orthodontic training with general dentistry to help patients achieve healthy, confident smiles. She provides compassionate, personalized care for patients of all ages.",
     image: "/images/team/dr-tihany-rodriguez.jpg",
   },
   {
@@ -28,7 +28,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     name: "Helen Vega RDH",
     title: "Registered Dental Hygienist",
     description:
-      "Helen is passionate about educating patients on proper oral hygiene.",
+      "Our dental hygienist joined MiraMar Family Dental in 2023 and is known for her gentle, thorough care. Bilingual in English and Spanish, she brings strong clinical training in dental hygiene, including coronal polishing and digital radiography.",
     image: "/images/team/helen-vega.jpg",
   },
 ];

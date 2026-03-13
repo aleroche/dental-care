@@ -5,9 +5,9 @@ import { TEAM_MEMBERS } from "@/lib/team";
 import { ArrowRight, Linkedin } from "lucide-react";
 
 const teamImages: Record<string, string> = {
-  "dr-keyttia-beovides": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80",
-  "dr-tihany-rodriguez": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80",
-  "helen-vega": "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&q=80",
+  "dr-keyttia-beovides": "https://miramarfamilydental.com/wp-content/uploads/elementor/thumbs/DrKeyttiaBeovides-consultorio-rgvvp61lhr67t812swuzm3e994t3nslp2evnammykc.webp",
+  "dr-tihany-rodriguez": "https://miramarfamilydental.com/wp-content/uploads/elementor/thumbs/dr-rodriguez-rbyrlgx6oompjz8xf45rjmy9f0rfsjwvme4ngbfou4.webp",
+  "helen-vega": "https://miramarfamilydental.com/wp-content/uploads/elementor/thumbs/Helen-hygienist-rgx7tc0ltsdkw1yn65fqzhku896lby6ivu6pwcc67w.webp",
 };
 
 export function TeamSection() {
@@ -37,7 +37,7 @@ export function TeamSection() {
             Meet Our Dental Experts
           </h2>
           <p className="text-[#64748B] max-w-2xl mx-auto">
-            Experienced professionals dedicated to creating healthy, beautiful smiles 
+            Experienced professionals dedicated to creating healthy, beautiful smiles
             for your entire family.
           </p>
         </div>
@@ -52,15 +52,15 @@ export function TeamSection() {
             >
               {/* Image Container */}
               <div className="relative aspect-[3/4] overflow-hidden">
-                <img 
+                <imgi
                   src={teamImages[member.id] || "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80"}
                   alt={member.name}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                
+
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
+
                 {/* Social Button */}
                 <div className="absolute bottom-6 left-6 right-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
                   <button className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/20 backdrop-blur-sm text-white rounded-lg text-sm font-semibold hover:bg-white/30 transition-colors">
@@ -88,7 +88,7 @@ export function TeamSection() {
 
         {/* CTA - Defined Button Color */}
         <div className={`text-center mt-12 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '700ms' }}>
-          <a 
+          <a
             href="/contact"
             className="inline-flex items-center gap-3 px-8 py-4 bg-[#1E293B] text-white font-semibold rounded-lg hover:bg-[#0A6CFF] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
           >
