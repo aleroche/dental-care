@@ -3,11 +3,11 @@ import {
   HeroSection,
   OffersSection,
   AboutSection,
+  FeaturesSection,
   WhyUsSection,
   BilingualSection,
   ServicesSection,
   InsuranceSection,
-  FinancingSection,
   TeamSection,
   TestimonialsSection,
   Footer,
@@ -21,11 +21,11 @@ export default function Home() {
         <HeroSection />
         <OffersSection />
         <AboutSection />
+        <FeaturesSection />
         <WhyUsSection />
         <BilingualSection />
         <ServicesSection />
         <InsuranceSection />
-        <FinancingSection />
         <TeamSection />
         <TestimonialsSection />
       </main>

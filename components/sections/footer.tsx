@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Facebook, Instagram, MapPin, Phone, Clock, ArrowRight } from "lucide-react";
 
@@ -7,28 +10,31 @@ const ADDRESS = {
   state: "TX",
   zip: "77494"
 };
+
 const SOCIAL = {
   facebook: "https://facebook.com",
   instagram: "https://instagram.com"
 };
 
 export function Footer() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-r from-[#0052CC] to-[#003D99] text-white relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 pointer-events-none opacity-5">
-        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-            <circle cx="1" cy="1" r="1" fill="currentColor" />
-          </pattern>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
+    <footer className="bg-gradient-to-r from-[#0A6CFF] to-[#003D99] dark:from-[#0F172A] dark:to-[#1E293B] text-white relative overflow-hidden">
+      {/* Background - Subtle gradient mesh instead of dots */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#00B894]/10 rounded-full blur-3xl" />
       </div>
 
       <div className="container-wide relative z-10 px-6 py-14">
-        {/* Main Footer Content - 4 columns as per SPEC */}
+        {/* Main Footer Content - 4 columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand Column */}
           <div className="lg:col-span-1">
@@ -49,7 +55,7 @@ export function Footer() {
               exceptional dental care for the whole family.
             </p>
 
-            {/* Social Links - Better hover contrast */}
+            {/* Social Links */}
             <div className="flex gap-2">
               {SOCIAL.facebook && (
                 <a 
@@ -152,7 +158,7 @@ export function Footer() {
               </li>
             </ul>
 
-            {/* Emergency Notice - Better contrast with darker green */}
+            {/* Emergency Notice */}
             <div className="mt-5 p-4 bg-[#00B894] rounded-xl">
               <p className="text-white font-bold text-sm mb-1">Dental Emergency?</p>
               <p className="text-white/90 text-xs">
@@ -170,7 +176,7 @@ export function Footer() {
               &copy; {currentYear} MiraMar Family Dental
             </p>
 
-            {/* Legal Links - Better hover */}
+            {/* Legal Links */}
             <div className="flex flex-wrap gap-4 text-sm">
               <Link href="/privacy" className="cursor-pointer text-white/50 hover:text-white transition-colors">
                 Privacy Policy
