@@ -61,9 +61,6 @@ export function FeaturesSection() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#0A6CFF]/5 dark:bg-[#0A6CFF]/10 rounded-full blur-3xl" />
       </div>
 
-      {/* Top border for visual separation */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#E2E8F0] dark:via-[#334155] to-transparent" />
-
       <div className="container-wide relative z-10">
         {/* Row 1: Image | Text | Image | Text */}
         <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
