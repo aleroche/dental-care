@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { ArrowRight, Globe2 } from "lucide-react";
 
-const teamImage = "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80";
+const teamImage = "https://miramarfamilydental.com/wp-content/uploads/2025/09/mfd-new-team-image.webp";
 
 export function BilingualSection() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -17,14 +17,6 @@ export function BilingualSection() {
     <section className="py-24 bg-gradient-to-r from-[#00896B] to-[#006B52] relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 opacity-10">
-          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-              <circle cx="1" cy="1" r="1" fill="currentColor" />
-            </pattern>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-          </svg>
-        </div>
         <div className="absolute -right-32 top-0 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
         <div className="absolute -left-32 bottom-0 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
       </div>

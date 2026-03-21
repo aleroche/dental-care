@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { ArrowRight, CheckCircle2, Heart, Shield, Stethoscope, Play } from "lucide-react";
 
-const aboutImage = "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&q=80";
+const YT_VIDEO_ID = "wtia5_wCFdI";
+const YT_THUMBNAIL = "https://miramarfamilydental.com/wp-content/uploads/2024/04/Miramar-Family-Dental.jpeg";
 
 const values = [
   { icon: Heart, text: "Compassionate Care" },
@@ -31,41 +32,38 @@ export function AboutSection() {
 
       <div className="container-wide relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Image/Video Side */}
+          {/* Video Side */}
           <div className={`relative transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
-              <img 
-                src={aboutImage} 
-                alt="MiraMar Family Dental Clinic"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/60 via-transparent to-transparent" />
-              
-              {/* Play Button for Video */}
-              <button 
-                onClick={() => setIsPlaying(!isPlaying)}
-                className="absolute inset-0 flex items-center justify-center group"
-              >
-                <div className="w-24 h-24 bg-white/90 dark:bg-white/20 rounded-full flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-110 duration-0">
-                  {isPlaying ? (
-                    <div className="w-0 h-0 border-l-[16px] border-l-[#0A6CFF] border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent ml-1" />
-                  ) : (
-                    <Play className="w-8 h-8 text-[#0A6CFF] ml-1" fill="currentColor" />
-                  )}
-                </div>
-              </button>
+            <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl">
+              {isPlaying ? (
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src={`https://www.youtube-nocookie.com/embed/${YT_VIDEO_ID}?autoplay=1&mute=1&controls=1&rel=0`}
+                  title="MiraMar Family Dental"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : (
+                <>
+                  <img
+                    src={YT_THUMBNAIL}
+                    alt="MiraMar Family Dental"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-              {/* Stats Overlay */}
-              <div className="absolute top-6 left-6 flex gap-3">
-                <div className="bg-white/95 backdrop-blur-sm dark:bg-[#1E293B]/95 dark:backdrop-blur-sm rounded-2xl p-4 shadow-lg">
-                  <span className="font-serif text-3xl text-[#0A6CFF] dark:text-[#4D94FF] font-bold">15+</span>
-                  <p className="text-xs text-[#64748B] dark:text-[#94A3B8]">Years</p>
-                </div>
-              </div>
-
-              <div className="absolute bottom-6 right-6 bg-white/95 backdrop-blur-sm dark:bg-[#1E293B]/95 dark:backdrop-blur-sm rounded-2xl px-5 py-3 shadow-lg">
-                <span className="text-sm font-semibold text-[#1E293B] dark:text-white">Years of Excellence</span>
-              </div>
+                  {/* Play Button */}
+                  <button
+                    onClick={() => setIsPlaying(true)}
+                    aria-label="Play video"
+                    className="absolute inset-0 flex items-center justify-center group"
+                  >
+                    <div className="w-20 h-20 bg-white/95 rounded-full flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-110">
+                      <Play className="w-8 h-8 text-[#0A6CFF] ml-1" fill="currentColor" />
+                    </div>
+                  </button>
+                </>
+              )}
             </div>
 
             {/* Floating Card */}

@@ -16,7 +16,7 @@ import {
 export default function Home() {
   return (
     <>
-      <Navbar />
+     
       <main>
         <HeroSection />
         <OffersSection />
@@ -29,7 +29,7 @@ export default function Home() {
         <TeamSection />
         <TestimonialsSection />
       </main>
-      <Footer />
+      
     </>
   );
 }
