@@ -18,8 +18,8 @@ const NAV_ITEMS = [
     title: "About us", 
     href: "/about", 
     children: [
-      { title: "Dr Keyttia Beovides", href: "/about/dr-beovides" },
-      { title: "Meet the Team", href: "/about/team" }
+      { title: "Dr Keyttia Beovides", href: "/about-us/dr-keyttia-beovides" },
+      { title: "Meet the Team", href: "/about-us/team" }
     ]
   },
   { 
