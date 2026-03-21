@@ -25,16 +25,16 @@ export function DigitalXRayBenefits() {
         backgroundSize: '40px 40px'
       }} />
 
-      <div className="container-wide relative z-10">
+      <div className="container-wide relative z-10 px-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#1E293B] dark:text-white mb-6 leading-tight">
+            <h2 className="font-serif text-2xl md:text-3xl text-[#1E293B] dark:text-white font-bold mb-4 leading-tight">
               Benefits of Digital Dental X-rays
             </h2>
-            <p className="text-lg text-[#64748B] dark:text-[#94A3B8] mb-8 leading-relaxed">
+            <p className="text-base text-[#475569] dark:text-[#94A3B8] mb-8 leading-relaxed">
               Compared to traditional X-rays, digital X-rays offer multiple advantages:
             </p>
-            <div className="relative h-48 lg:h-56 w-full rounded-2xl overflow-hidden">
+            <div className="relative h-64 lg:h-80 w-full rounded-2xl overflow-hidden">
               <img
                 src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=80"
                 alt="Digital dental X-ray technology"
@@ -56,10 +56,10 @@ export function DigitalXRayBenefits() {
                     <item.icon className="w-5 h-5 text-[#0A6CFF] dark:text-[#4D94FF] group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-medium text-[#1E293B] dark:text-white text-sm lg:text-base mb-1 group-hover:text-[#0A6CFF] dark:group-hover:text-[#4D94FF] transition-colors">
+                    <h3 className="font-semibold text-[#1E293B] dark:text-white mb-1 group-hover:text-[#0A6CFF] dark:group-hover:text-[#4D94FF] transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-xs lg:text-sm text-[#64748B] dark:text-[#94A3B8] leading-relaxed">
+                    <p className="text-sm text-[#475569] dark:text-[#94A3B8] leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
