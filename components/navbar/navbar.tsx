@@ -1,64 +1,20 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Menu, X, Phone, Sun, Moon, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, Sun, Moon, ChevronDown, ChevronRight } from "lucide-react";
 import { useTheme } from "next-themes";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-
-const NAV_ITEMS = [
-  { 
-    title: "About us", 
-    href: "/about", 
-    children: [
-      { title: "Dr Keyttia Beovides", href: "/about-us/dr-keyttia-beovides" },
-      { title: "Meet the Team", href: "/about-us/team" }
-    ]
-  },
-  { 
-    title: "Dental Services", 
-    href: "/services", 
-    children: [
-      { title: "Diagnostic & Preventive", href: "/services/diagnostic" },
-      { title: "Oral Surgery", href: "/services/surgery" },
-      { title: "Restorative Dentistry", href: "/services/restorative" },
-      { title: "Endodontics", href: "/services/endodontics" },
-      { title: "Cosmetic Dentistry", href: "/services/cosmetic" },
-      { title: "Periodontal", href: "/services/periodontal" },
-      { title: "Orthodontic", href: "/services/orthodontic" },
-      { title: "Pediatric Dentistry", href: "/services/pediatric" }
-    ]
-  },
-  { 
-    title: "Patients", 
-    href: "/patients", 
-    children: [
-      { title: "New patients", href: "/patients/new" },
-      { title: "MFD Membership", href: "/patients/membership" },
-      { title: "Financing plans", href: "/patients/financing" },
-      { title: "Dental Insurance", href: "/patients/insurance" },
-      { title: "FAQs", href: "/patients/faqs" }
-    ]
-  },
-  { title: "Blog", href: "/blog" },
-  { title: "Deals", href: "/deals" },
-  { title: "Reviews", href: "/reviews" },
-  { title: "Contact us", href: "/contact" }
-];
+import { NAV_ITEMS, NavItem } from "@/lib/navigation";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+  const [openNestedMenu, setOpenNestedMenu] = useState<string | null>(null);
+  const [openThirdLevelMenu, setOpenThirdLevelMenu] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -73,6 +29,19 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setOpenSubmenu(null);
+        setOpenNestedMenu(null);
+        setOpenThirdLevelMenu(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const isDark = mounted && theme === 'dark';
 
   const toggleTheme = () => {
@@ -81,6 +50,14 @@ export function Navbar() {
 
   const toggleSubmenu = (title: string) => {
     setOpenSubmenu(openSubmenu === title ? null : title);
+    setOpenNestedMenu(null);
+    setOpenThirdLevelMenu(null);
+  };
+
+  const closeAllMenus = () => {
+    setOpenSubmenu(null);
+    setOpenNestedMenu(null);
+    setOpenThirdLevelMenu(null);
   };
 
   const headerBg = scrolled || isOpen 
@@ -110,9 +87,130 @@ export function Navbar() {
   const mobileHoverColor = 'hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B]';
   const mobileAccentColor = 'hover:text-[#0A6CFF] dark:hover:text-[#4D94FF]';
 
+  const renderNavItem = (item: NavItem) => {
+    if (item.children) {
+      return (
+        <div
+          key={item.title}
+          className="relative"
+          onMouseEnter={() => {
+            setOpenSubmenu(item.title);
+            setOpenNestedMenu(null);
+          }}
+        >
+          <button
+            className={`
+              inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors bg-transparent cursor-pointer
+              ${navLinkColor}
+            `}
+          >
+            {item.title}
+            <ChevronDown className="ml-1 w-4 h-4" />
+          </button>
+
+          {openSubmenu === item.title && (
+            <div className="absolute left-0 top-full mt-1 z-50">
+              <ul className="w-56 bg-white dark:bg-[#1E293B] p-1 rounded-lg shadow-xl dark:shadow-2xl border border-gray-100 dark:border-gray-700">
+                {item.children.map((child) => (
+                  <li key={child.title}>
+                    {child.children ? (
+                      <div
+                        className="relative"
+                        onMouseEnter={() => setOpenNestedMenu(child.title)}
+                      >
+                        <button
+                          className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-[#475569] dark:text-[#CBD5E1] hover:bg-[#00B894] hover:text-white dark:hover:bg-[#00D9A5] dark:hover:text-white rounded-md cursor-pointer transition-colors"
+                        >
+                          {child.title}
+                          <ChevronRight className="w-4 h-4" />
+                        </button>
+
+                        {openNestedMenu === child.title && (
+                          <div className="absolute left-full top-0 ml-1">
+                            <ul className="w-52 bg-white dark:bg-[#1E293B] p-1 rounded-lg shadow-xl dark:shadow-2xl border border-gray-100 dark:border-gray-700">
+                              {child.children.map((nested) => (
+                                <li key={nested.title}>
+                                  {nested.children ? (
+                                    <div
+                                      className="relative"
+                                      onMouseEnter={() => setOpenThirdLevelMenu(nested.title)}
+                                    >
+                                      <button
+                                        className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-[#475569] dark:text-[#CBD5E1] hover:bg-[#00B894] hover:text-white dark:hover:bg-[#00D9A5] dark:hover:text-white rounded-md cursor-pointer transition-colors"
+                                      >
+                                        {nested.title}
+                                        <ChevronRight className="w-4 h-4" />
+                                      </button>
+
+                                      {openThirdLevelMenu === nested.title && (
+                                        <div className="absolute left-full top-0 ml-1">
+                                          <ul className="w-48 bg-white dark:bg-[#1E293B] p-1 rounded-lg shadow-xl dark:shadow-2xl border border-gray-100 dark:border-gray-700">
+                                            {nested.children.map((thirdLevel) => (
+                                              <li key={thirdLevel.title}>
+                                                <Link
+                                                  href={thirdLevel.href || "#"}
+                                                  className="block px-4 py-2.5 text-sm text-[#475569] dark:text-[#CBD5E1] hover:bg-[#00B894] hover:text-white dark:hover:bg-[#00D9A5] dark:hover:text-white rounded-md cursor-pointer transition-colors"
+                                                  onClick={closeAllMenus}
+                                                >
+                                                  {thirdLevel.title}
+                                                </Link>
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      )}
+                                    </div>
+                                  ) : (
+                                    <Link
+                                      href={nested.href || "#"}
+                                      className="block px-4 py-2.5 text-sm text-[#475569] dark:text-[#CBD5E1] hover:bg-[#00B894] hover:text-white dark:hover:bg-[#00D9A5] dark:hover:text-white rounded-md cursor-pointer transition-colors"
+                                      onClick={closeAllMenus}
+                                    >
+                                      {nested.title}
+                                    </Link>
+                                  )}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <Link
+                        href={child.href || "#"}
+                        className="block px-4 py-2.5 text-sm text-[#475569] dark:text-[#CBD5E1] hover:bg-[#00B894] hover:text-white dark:hover:bg-[#00D9A5] dark:hover:text-white rounded-md cursor-pointer transition-colors"
+                        onClick={closeAllMenus}
+                      >
+                        {child.title}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    return (
+      <Link
+        key={item.title}
+        href={item.href || "#"}
+        className={`
+          inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors bg-transparent
+          ${navLinkColor}
+        `}
+      >
+        {item.title}
+      </Link>
+    );
+  };
+
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBg} ${headerPy}`}
+      ref={navRef}
     >
       <div className="container-wide">
         <div className="flex items-center justify-between">
@@ -135,52 +233,9 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <NavigationMenu className="hidden lg:flex" viewport={false}>
-            <NavigationMenuList className="gap-1">
-              {NAV_ITEMS.map((item) => (
-                <NavigationMenuItem key={item.title}>
-                  {item.children ? (
-                    <>
-                      <NavigationMenuTrigger className={`
-                        inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors bg-transparent 
-                        ${navLinkColor}
-                      `}>
-                        {item.title}
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="absolute left-0 top-full mt-1 !bg-transparent !border-0 !shadow-none">
-                        <ul className="w-56 bg-white dark:bg-[#1E293B] p-1 rounded-lg shadow-xl dark:shadow-2xl">
-                          {item.children.map((child) => (
-                            <li key={child.title}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  href={child.href || "#"}
-                                  className="block px-4 py-2.5 text-sm text-[#475569] dark:text-[#CBD5E1] hover:bg-[#F1F5F9] dark:hover:bg-[#0A6CFF]/20 hover:text-[#0A6CFF] dark:hover:text-[#4D94FF] rounded-md cursor-pointer transition-colors"
-                                >
-                                  {child.title}
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </>
-                  ) : (
-                    <NavigationMenuLink asChild>
-                      <Link 
-                        href={item.href || "#"}
-                        className={`
-                          inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors bg-transparent
-                          ${navLinkColor}
-                        `}
-                      >
-                        {item.title}
-                      </Link>
-                    </NavigationMenuLink>
-                  )}
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+          <nav className="hidden lg:flex items-center gap-1">
+            {NAV_ITEMS.map((item) => renderNavItem(item))}
+          </nav>
 
           {/* CTA & Phone */}
           <div className="hidden lg:flex items-center gap-4">

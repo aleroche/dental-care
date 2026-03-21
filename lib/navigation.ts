@@ -15,8 +15,8 @@ export const NAV_ITEMS: NavItem[] = [
   {
     title: "About us",
     children: [
-      { title: "Dr Keyttia Beovides", href: "/about/dr-keyttia-beovides" },
-      { title: "Meet the Team", href: "/about/team" },
+      { title: "Dr Keyttia Beovides", href: "/about-us/dr-keyttia-beovides" },
+      { title: "Meet the Team", href: "/about-us/team" },
     ],
   },
   {
@@ -25,7 +25,7 @@ export const NAV_ITEMS: NavItem[] = [
       {
         title: "Diagnostic & Preventive",
         children: [
-          { title: "Dental Radiographs", href: "/services/dental-radiographs" },
+          { title: "Dental Radiographs", href: "/dental-services/diagnostic-and-preventive/dental-radiographs" },
         ],
       },
       {
@@ -38,7 +38,7 @@ export const NAV_ITEMS: NavItem[] = [
           },
         ],
       },
-      { title: "Restorative Dentistry", href: "/services/restorative-dentistry" },
+      { title: "Restorative Dentistry", href: "/dental-services/restorative-dentistry" },
       { title: "Endodontics", href: "/services/endodontics" },
       { title: "Cosmetic Dentistry", href: "/services/cosmetic-dentistry" },
       {
