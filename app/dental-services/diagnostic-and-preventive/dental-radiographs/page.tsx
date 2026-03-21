@@ -2,9 +2,80 @@ import Image from "next/image";
 import { ArrowRight, Bandage, Syringe, Smile, Baby, Maximize2, Stethoscope } from "lucide-react";
 import { DigitalXRayBenefits } from "@/components/sections/digital-xray-benefits-section";
 import { DigitalXRaySafety } from "@/components/sections/digital-xray-safety-section";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Digital Dental X-rays in Katy, TX | MiraMar Family Dental",
+  description: "Discover the benefits of digital dental X-rays at MiraMar Family Dental in Katy, TX. Less radiation, instant images, and safer diagnosis. Schedule your visit today!",
+  keywords: [
+    "digital dental X-rays",
+    "dental radiographs Katy TX",
+    "dental X-ray safety",
+    "family dentist Katy",
+    "MiraMar Family Dental",
+    "dental imaging",
+    "bitewing X-rays",
+    "panoramic X-rays",
+  ],
+  openGraph: {
+    title: "Digital Dental X-rays in Katy, TX | MiraMar Family Dental",
+    description: "Discover the benefits of digital dental X-rays. Less radiation, instant images, and safer diagnosis.",
+    url: "https://miramarfamilydental.com/dental-services/diagnostic-and-preventive/dental-radiographs/",
+    siteName: "MiraMar Family Dental",
+    images: [
+      {
+        url: "https://miramarfamilydental.com/wp-content/uploads/2024/08/image-for-landing-5.png",
+        width: 1200,
+        height: 630,
+        alt: "Digital Dental X-rays at MiraMar Family Dental",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Digital Dental X-rays in Katy, TX",
+    description: "Discover the benefits of digital dental X-rays. Less radiation, instant images, and safer diagnosis.",
+    images: ["https://miramarfamilydental.com/wp-content/uploads/2024/08/image-for-landing-5.png"],
+  },
+  alternates: {
+    canonical: "https://miramarfamilydental.com/dental-services/diagnostic-and-preventive/dental-radiographs/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  name: "MiraMar Family Dental",
+  description: "Digital dental X-rays with less radiation and instant results for better diagnosis.",
+  url: "https://miramarfamilydental.com",
+  telephone: "+1-832-779-8444",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Katy",
+    addressRegion: "TX",
+    addressCountry: "US",
+  },
+  medicalSpecialty: "Dental",
+  availableService: {
+    "@type": "MedicalProcedure",
+    name: "Digital Dental X-rays",
+    description: "Advanced digital radiography with up to 90% less radiation than traditional X-rays.",
+  },
+};
 
 export default function DentalRadiographsPage() {
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     <main>
       {/* Header Section - Blue-50 background */}
       <section className="bg-[#5EC8F2] dark:bg-[#1E3A5F] min-h-40 mt-16 flex items-center">
@@ -220,5 +291,6 @@ export default function DentalRadiographsPage() {
       <DigitalXRayBenefits />
       <DigitalXRaySafety />
     </main>
+    </>
   );
 }
