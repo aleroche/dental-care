@@ -3,6 +3,7 @@ import { ArrowRight, Bandage, Syringe, Smile, Baby, Maximize2, Stethoscope } fro
 import { DigitalXRayBenefits } from "@/components/sections/digital-xray-benefits-section";
 import { DigitalXRaySafety } from "@/components/sections/digital-xray-safety-section";
 import type { Metadata } from "next";
+import Header from "@/components/shared/header";
 
 export const metadata: Metadata = {
   title: "Digital Dental X-rays in Katy, TX | MiraMar Family Dental",
@@ -78,15 +79,7 @@ export default function DentalRadiographsPage() {
       />
     <main>
       {/* Header Section - Blue-50 background */}
-      <section className="bg-[#5EC8F2] dark:bg-[#1E3A5F] min-h-40 mt-16 flex items-center">
-        <div className="container-wide w-full">
-          <div className="animate-fade-in-up px-10">
-            <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white font-bold leading-tight">
-              Discover the Benefits of Digital Dental X-rays in Katy, TX
-            </h1>
-          </div>
-        </div>
-      </section>
+      <Header title="Discover the Benefits of Digital Dental X-rays in Katy, TX" />
 
       {/* Description Section - White background */}
       <section className="bg-white dark:bg-[#0F172A] py-16 md:py-20">
