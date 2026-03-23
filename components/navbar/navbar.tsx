@@ -6,6 +6,8 @@ import { Menu, X, Phone, Sun, Moon, ChevronDown, ChevronRight } from "lucide-rea
 import { useTheme } from "next-themes";
 import { NAV_ITEMS, NavItem } from "@/lib/navigation";
 
+const MENU_DELAY = 150;
+
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
@@ -15,6 +17,7 @@ export function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -39,7 +42,12 @@ export function Navbar() {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
   }, []);
 
   const isDark = mounted && theme === 'dark';
@@ -58,6 +66,31 @@ export function Navbar() {
     setOpenSubmenu(null);
     setOpenNestedMenu(null);
     setOpenThirdLevelMenu(null);
+  };
+
+  const handleMouseLeave = (level: 'submenu' | 'nested' | 'third') => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    closeTimeoutRef.current = setTimeout(() => {
+      if (level === 'submenu') {
+        setOpenSubmenu(null);
+        setOpenNestedMenu(null);
+        setOpenThirdLevelMenu(null);
+      } else if (level === 'nested') {
+        setOpenNestedMenu(null);
+        setOpenThirdLevelMenu(null);
+      } else if (level === 'third') {
+        setOpenThirdLevelMenu(null);
+      }
+    }, MENU_DELAY);
+  };
+
+  const handleMouseEnter = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
   };
 
   const headerBg = scrolled || isOpen 
@@ -90,14 +123,16 @@ export function Navbar() {
   const renderNavItem = (item: NavItem) => {
     if (item.children) {
       return (
-        <div
-          key={item.title}
-          className="relative"
-          onMouseEnter={() => {
-            setOpenSubmenu(item.title);
-            setOpenNestedMenu(null);
-          }}
-        >
+          <div
+            key={item.title}
+            className="relative"
+            onMouseEnter={() => {
+              handleMouseEnter();
+              setOpenSubmenu(item.title);
+              setOpenNestedMenu(null);
+            }}
+            onMouseLeave={() => handleMouseLeave('submenu')}
+          >
           <button
             className={`
               inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors bg-transparent cursor-pointer
@@ -109,14 +144,22 @@ export function Navbar() {
           </button>
 
           {openSubmenu === item.title && (
-            <div className="absolute left-0 top-full mt-1 z-50">
+            <div 
+              className="absolute left-0 top-full mt-1 z-50"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={() => handleMouseLeave('submenu')}
+            >
               <ul className="w-56 bg-white dark:bg-[#1E293B] p-1 rounded-lg shadow-xl dark:shadow-2xl border border-gray-100 dark:border-gray-700">
                 {item.children.map((child) => (
                   <li key={child.title}>
                     {child.children ? (
                       <div
                         className="relative"
-                        onMouseEnter={() => setOpenNestedMenu(child.title)}
+                        onMouseEnter={() => {
+                          handleMouseEnter();
+                          setOpenNestedMenu(child.title);
+                        }}
+                        onMouseLeave={() => handleMouseLeave('nested')}
                       >
                         <button
                           className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-[#475569] dark:text-[#CBD5E1] hover:bg-[#00B894] hover:text-white dark:hover:bg-[#00D9A5] dark:hover:text-white rounded-md cursor-pointer transition-colors"
@@ -126,14 +169,22 @@ export function Navbar() {
                         </button>
 
                         {openNestedMenu === child.title && (
-                          <div className="absolute left-full top-0 ml-1">
+                          <div 
+                            className="absolute left-full top-0 ml-1"
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={() => handleMouseLeave('nested')}
+                          >
                             <ul className="w-52 bg-white dark:bg-[#1E293B] p-1 rounded-lg shadow-xl dark:shadow-2xl border border-gray-100 dark:border-gray-700">
                               {child.children.map((nested) => (
                                 <li key={nested.title}>
                                   {nested.children ? (
                                     <div
                                       className="relative"
-                                      onMouseEnter={() => setOpenThirdLevelMenu(nested.title)}
+                                      onMouseEnter={() => {
+                                        handleMouseEnter();
+                                        setOpenThirdLevelMenu(nested.title);
+                                      }}
+                                      onMouseLeave={() => handleMouseLeave('third')}
                                     >
                                       <button
                                         className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-[#475569] dark:text-[#CBD5E1] hover:bg-[#00B894] hover:text-white dark:hover:bg-[#00D9A5] dark:hover:text-white rounded-md cursor-pointer transition-colors"
@@ -143,7 +194,11 @@ export function Navbar() {
                                       </button>
 
                                       {openThirdLevelMenu === nested.title && (
-                                        <div className="absolute left-full top-0 ml-1">
+                                        <div 
+                                          className="absolute left-full top-0 ml-1"
+                                          onMouseEnter={handleMouseEnter}
+                                          onMouseLeave={() => handleMouseLeave('third')}
+                                        >
                                           <ul className="w-48 bg-white dark:bg-[#1E293B] p-1 rounded-lg shadow-xl dark:shadow-2xl border border-gray-100 dark:border-gray-700">
                                             {nested.children.map((thirdLevel) => (
                                               <li key={thirdLevel.title}>
