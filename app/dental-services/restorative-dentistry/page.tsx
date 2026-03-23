@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Header from "@/components/shared/header";
 import { VideoTextSection } from "@/src/components/video-text-section";
 import { ServicesList } from "@/src/components/services-list";
@@ -6,7 +6,14 @@ import { ImageGrid } from "@/src/components/image-grid";
 import { SectionText } from "@/src/components/section-text";
 import { restorativeDentistryData } from "@/src/data/restorative-dentistry";
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://miramarfamilydental.com"),
   title: "Restorative Dentistry in Katy, TX | MiraMar Family Dental",
   description:
     "Restore your smile with MiraMar Family Dental's restorative dentistry services in Katy, TX. From fillings to implants, we provide comprehensive dental care for the whole family.",

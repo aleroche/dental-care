@@ -2,10 +2,17 @@ import Image from "next/image";
 import { ArrowRight, Bandage, Syringe, Smile, Baby, Maximize2, Stethoscope } from "lucide-react";
 import { DigitalXRayBenefits } from "@/components/sections/digital-xray-benefits-section";
 import { DigitalXRaySafety } from "@/components/sections/digital-xray-safety-section";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Header from "@/components/shared/header";
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://miramarfamilydental.com"),
   title: "Digital Dental X-rays in Katy, TX | MiraMar Family Dental",
   description: "Discover the benefits of digital dental X-rays at MiraMar Family Dental in Katy, TX. Less radiation, instant images, and safer diagnosis. Schedule your visit today!",
   keywords: [

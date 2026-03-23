@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Header from "@/components/shared/header";
 import { VideoTextSection } from "@/src/components/video-text-section";
 import { ServicesList } from "@/src/components/services-list";
@@ -6,7 +6,14 @@ import { ImageGrid } from "@/src/components/image-grid";
 import { SectionText } from "@/src/components/section-text";
 import { cosmeticDentistryData } from "@/src/data/cosmetic-dentistry";
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://miramarfamilydental.com"),
   title: "Cosmetic Dentistry in Katy, TX | MiraMar Family Dental",
   description:
     "Transform your smile with MiraMar Family Dental's cosmetic dentistry services in Katy, TX. From veneers to teeth whitening, we provide comprehensive cosmetic dental care for the whole family.",
@@ -28,7 +35,7 @@ export const metadata: Metadata = {
     siteName: "MiraMar Family Dental",
     images: [
       {
-        url: "https://miramarfamilydental.com/wp-content/uploads/2024/08/image-for-landing-5.png",
+        url: "https://miramarfamilydental.com/wp-content/uploads/2024/03/servicios-cosmetica-sonrisa-1024x1024.webp",
         width: 1200,
         height: 630,
         alt: "Cosmetic Dentistry at MiraMar Family Dental",
@@ -43,7 +50,7 @@ export const metadata: Metadata = {
     description:
       "Transform your smile with our cosmetic dentistry services.",
     images: [
-      "https://miramarfamilydental.com/wp-content/uploads/2024/08/image-for-landing-5.png",
+      "https://miramarfamilydental.com/wp-content/uploads/2024/03/servicios-cosmetica-sonrisa-1024x1024.webp",
     ],
   },
   alternates: {
