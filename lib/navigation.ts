@@ -40,7 +40,7 @@ export const NAV_ITEMS: NavItem[] = [
       },
       { title: "Restorative Dentistry", href: "/dental-services/restorative-dentistry" },
       { title: "Endodontics", href: "/services/endodontics" },
-      { title: "Cosmetic Dentistry", href: "/services/cosmetic-dentistry" },
+      { title: "Cosmetic Dentistry", href: "/dental-services/cosmetic-dentistry" },
       {
         title: "Periodontal",
         children: [
