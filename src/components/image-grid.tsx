@@ -11,7 +11,7 @@ interface ImageGridProps {
 
 export function ImageGrid({ images }: ImageGridProps) {
   return (
-    <section className="bg-white dark:bg-[#0F172A] py-12 md:py-16">
+    <section className="bg-white dark:bg-[#0F172A] py-8 md:py-12">
       <div className="container-wide w-full">
         <div className="animate-fade-in-up px-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

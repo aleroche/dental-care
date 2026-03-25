@@ -5,7 +5,7 @@ interface SectionTextProps {
 
 export function SectionText({ text, emphasis = false }: SectionTextProps) {
   return (
-    <section className="bg-gray-50 dark:bg-[#0F172A] py-16 md:py-24">
+    <section className="bg-gray-50 dark:bg-[#0F172A] py-12 md:py-16">
       <div className="container-wide w-full">
         <div className="animate-fade-in-up px-10">
           <p

@@ -1,16 +1,16 @@
 interface VideoTextSectionProps {
   videoSrc: string;
-  title: string;
+  title?: string | null;
   description: string;
 }
 
 export function VideoTextSection({
   videoSrc,
-  title,
+  title = null,
   description,
 }: VideoTextSectionProps) {
   return (
-    <section className="bg-white dark:bg-[#0F172A] py-16 md:py-24">
+    <section className="bg-white dark:bg-[#0F172A] py-12 md:py-16">
       <div className="container-wide w-full">
         <div className="animate-fade-in-up px-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">

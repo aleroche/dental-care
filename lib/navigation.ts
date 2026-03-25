@@ -5,13 +5,7 @@ export interface NavItem {
 }
 
 export const NAV_ITEMS: NavItem[] = [
-  {
-    title: "Language",
-    children: [
-      { title: "English", href: "/en" },
-      { title: "Spanish", href: "/es" },
-    ],
-  },
+  
   {
     title: "About us",
     children: [
@@ -39,17 +33,19 @@ export const NAV_ITEMS: NavItem[] = [
         ],
       },
       { title: "Restorative Dentistry", href: "/dental-services/restorative-dentistry" },
-      { title: "Endodontics", href: "/services/endodontics" },
+      { title: "Endodontics", href: "/dental-services/endodontic-services" },
       { title: "Cosmetic Dentistry", href: "/dental-services/cosmetic-dentistry" },
       {
         title: "Periodontal",
+        
         children: [
+          { title: "Periodontal Services", href: "/dental-services/periodontal-services", },
           { title: "Deep Dental Cleaning", href: "/services/deep-dental-cleaning" },
         ],
       },
-      { title: "Orthodontic", href: "/services/orthodontic" },
-      { title: "Pediatric Dentistry", href: "/services/pediatric-dentistry" },
-      { title: "Other Services", href: "/services/other" },
+      { title: "Orthodontic", href: "/dental-services/orthodontic-services" },
+      { title: "Pediatric Dentistry", href: "/dental-services/pediatric-dentistry" },
+      { title: "Other Services", href: "/dental-services/other-dental-services" },
     ],
   },
   {
@@ -62,7 +58,6 @@ export const NAV_ITEMS: NavItem[] = [
       { title: "FAQs", href: "/patients/faqs" },
     ],
   },
-  { title: "Blog", href: "/blog" },
   { title: "Deals", href: "/deals" },
   { title: "Reviews", href: "/reviews" },
   { title: "Contact us", href: "/contact" },
